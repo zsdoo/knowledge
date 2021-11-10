@@ -1,0 +1,124 @@
+crontab用法与实例
+
+# 每分钟同步一次网络时间
+* * * * * /usr/sbin/ntpdate -u ntp.api.bz >>/root/testtttt.txt
+#
+每一小时重启smb
+0  */1  *  *  *  /etc/init.d/smb restart
+
+
+#
+service crond status  查看状态
+service crond restart
+
+ntpdate -u ntp.sjtu.edu.cn（时钟服务器根据实际环境设置、本文采用210.72.145.44-国家授时中心服务器IP地址）
+
+
+
+"*"代表所有的取值范围内的数字，如月份字段为*，则表示1到12个月；
+
+"/"代表每一定时间间隔的意思，如分钟字段为*/10，表示每10分钟执行1次。
+
+"-"代表从某个区间范围，是闭区间。如“2-5”表示“2,3,4,5”，小时字段中0-23/2表示在0~23点范围内每2个小时执行一次。
+
+","分散的数字（不一定连续），如1,2,3,4,7,9。
+
+注：由于各个地方每周第一天不一样，因此Sunday=0（第一天）或Sunday=7（最后1天）
+
+
+
+#
+
+格式:
+
+crontab [-u user] file
+crontab [ -u user ] [ -i ] { -e | -l | -r }
+• -u user：用于设定某个用户的crontab服务；
+• file: file为命令文件名，表示将file作为crontab的任务列表文件并载入crontab；
+• -e：编辑某个用户的crontab文件内容，如不指定用户则表示当前用户；
+• -l：显示某个用户的crontab文件内容，如不指定用户则表示当前用户；
+• -r：从/var/spool/cron目录中删除某个用户的crontab文件。
+• -i：在删除用户的crontab文件时给确认提示。
+
+#
+crontab注意点
+1 crontab有2种编辑方式：直接编辑/etc/crontab文件与crontab –e，其中/etc/crontab里的计划任务是系统中的计划任务，而用户的计划任务需要通过crontab –e来编辑；
+2 每次编辑完某个用户的cron设置后，cron自动在/var/spool/cron下生成一个与此用户同名的文件，此用户的cron信息都记录在这个文件中，这个文件是不可以直接编辑的，只可以用crontab -e 来编辑。
+3 crontab中的command尽量使用绝对路径，否则会经常因为路径错误导致任务无法执行。
+4 新创建的cron job不会马上执行，至少要等2分钟才能执行，可从起cron来立即执行。
+5 %在crontab文件中表示“换行”，因此假如脚本或命令含有%,需要使用\%来进行转义。
+
+#
+crontab配置实例
+
+每一分钟执行一次command（因cron默认每1分钟扫描一次，因此全为*即可）
+*    *    *    *    *  command
+
+每小时的第3和第15分钟执行command
+3,15   *    *    *    *  command
+
+每天上午8-11点的第3和15分钟执行command：
+
+3,15  8-11  *  *  *  command
+
+每隔2天的上午8-11点的第3和15分钟执行command：
+
+3,15  8-11  */2  *   *  command
+
+每个星期一的上午8点到11点的第3和第15分钟执行command
+
+3,15  8-11   *   *  1 command
+
+每晚的21:30重启smb
+
+30  21   *   *  *  /etc/init.d/smb restart
+
+每月1、10、22日的4 : 45重启smb
+45  4  1,10,22  *  *  /etc/init.d/smb restart
+
+每周六、周日的1 : 10重启smb
+
+10  1  *  *  6,0  /etc/init.d/smb restart
+
+每天18 : 00至23 : 00之间每隔30分钟重启smb
+
+0,30  18-23  *  *  *  /etc/init.d/smb restart
+
+每一小时重启smb
+
+0  */1  *  *  *  /etc/init.d/smb restart
+
+晚上11点到早上7点之间，每隔一小时重启smb
+
+*  23-7/1  *   *   *  /etc/init.d/smb restart
+
+每月的4号与每周一到周三的11点重启smb
+
+0  11  4  *  mon-wed  /etc/init.d/smb restart
+
+每小时执行/etc/cron.hourly目录内的脚本
+
+0  1   *   *   *     root run-parts /etc/cron.hourly
+
+
+PS：总结crontab任务不执行可以从这些方面入手
+
+1：请确保手工可以执行该文件（给sh文件增加X权限，看文件格式是否为unix→ set ff? →set ff=unix）
+
+2：确认开始crond服务（service crond status/start/stop）
+
+3: 确认给sh文件制定bash环境
+
+if [ -f ~/.bash_profile ];
+then
+  . ~/.bash_profile
+fi
+
+-----------------------------------
+加入crontab
+
+# echo "*/20 * * * * /usr/sbin/ntpdate -u ntp.api.bz >/dev/null &" >> /var/spool/cron/root
+
+重启定时任务服务（可忽略）
+
+service crond restart

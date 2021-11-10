@@ -1,0 +1,87 @@
+# awk
+awk命令形式:
+
+awk [-F|-f|-v] ‘BEGIN{} //{command1; command2} END{}’ file
+
+ [-F|-f|-v]   大参数，-F指定分隔符，-f调用脚本，-v定义变量 var=value
+
+'  '          引用代码块
+
+BEGIN   初始化代码块，在对每一行进行处理之前，初始化代码，主要是引用全局变量，设置FS分隔符
+
+//           匹配代码块，可以是字符串或正则表达式
+
+{}           命令代码块，包含一条或多条命令
+
+；          多条命令使用分号分隔
+
+END      结尾代码块，在对每一行进行处理之后再执行的代码块，主要是进行最终计算或输出结尾摘要信息
+
+
+//匹配代码块
+//纯字符匹配   !//纯字符不匹配   ~//字段值匹配    !~//字段值不匹配   ~/a1|a2/字段值匹配a1或a2 
+
+IF语句
+必须用在{}中，且比较内容用()扩起来
+awk -F: '{if($1~/mail/) print $1}' /etc/passwd                                       //简写
+awk -F: '{if($1~/mail/) {print $1}}'  /etc/passwd                                   //全写
+awk -F: '{if($1~/mail/) {print $1} else {print $2}}' /etc/passwd            //if...else...
+
+条件表达式
+==   !=   >   >=     #(~) 像like 'my%' 
+
+逻辑运算符 &&　|| 
+awk -F: '$1~/mail/ && $3>8 {print }' /etc/passwd         //逻辑与，$1匹配mail，并且$3>8
+awk -F: '{if($1~/mail/ && $3>8) print }' /etc/passwd
+awk -F: '$1~/mail/ || $3>1000 {print }' /etc/passwd       //逻辑或
+awk -F: '{if($1~/mail/ || $3>1000) print }' /etc/passwd 
+
+输出分隔符OFS
+awk '$6 ~ /FIN/ || NR==1 {print NR,$4,$5,$6}' OFS="\t" netstat.txt
+awk '$6 ~ /WAIT/ || NR==1 {print NR,$4,$5,$6}' OFS="\t" netstat.txt        
+//输出字段6匹配WAIT的行，其中输出每行行号，字段4，5,6，并使用制表符分割字段
+
+格式化输出
+netstat -anp|awk '{printf "%-8s %-8s %-10s\n",$1,$2,$3}' 
+printf表示格式输出
+%格式化输出分隔符
+-8长度为8个字符
+s表示字符串类型
+打印每行前三个字段，指定第一个字段输出字符串类型(长度为8)，第二个字段输出字符串类型(长度为8),
+第三个字段输出字符串类型(长度为10)
+netstat -anp|awk '$6=="LISTEN" || NR==1 {printf "%-10s %-10s %-10s \n",$1,$2,$3}'
+netstat -anp|awk '$6=="LISTEN" || NR==1 {printf "%-3s %-10s %-10s %-10s \n",NR,$1,$2,$3}'
+
+
+
+#
+
+
+awk -F":" '{print $2"---"$3}' testtttt.txt    # 可以取行字段，-F定义分隔符，$2 $3 表示第2、3个字段。
+awk '{print "Username:" $1 "\t\tUID:" $3}' testtttt.txt   # 中间有文字加变量
+awk -F":" '{print NF}' testtttt.txt   # 打印出末尾字段
+awk ' NF >1 {print NR,NF,$NF,"\t",$0}' testtttt.txt  #对长度>1的行，依次打印行号、长度、末尾字段、制表符，全部字段
+awk '/mail/,/mysql/' /etc/passwd  #区间匹配，从mail 到 mysql 中间所有行 ； '/mail|mysql/' 表示两个字段都取
+awk -F: '$1!~/mail|mysql/{print $1}' /etc/passwd  #匹配或不匹配某字段，像like 'my%' 
+awk -F: '$3+$4>1500' /etc/passwd   # 打印第3加第4个字段大于1500的行
+awk -F: '/polkitd/ {print $3-$4'} /etc/passwd  #匹配到某字段，用字段3-字段4
+
+awk '/MemFree/{print int($2/1024)"M",$0}' /proc/meminfo  #打印匹配字段，并取整数。
+
+awk -F: '{if($3>100) printf "%-3s %-15s %-10s\n",NR,$1,"large";else printf "%-3s %-15s %-10s\n",NR,$1,"small"}' /etc/passwd   #根据if语句判断并格式化显示：行号和第1个字段与加的字段。注意格式化时会因大小写原因会出错。
+
+awk 'BEGIN{A=0;b=0} {if($1~/[2][o]*/){A++;print "num"} else {B++; print "string"}} END {print A,"\t",B}' testtttt.txt 
+###### 注意BEGIN和END之间有个{},  如果第1个字段以20开头，则A+1，否则B+1。并且打印出来。
+
+awk 'BEGIN{i=1}{print "第"i++"行的时间是:"$1"共有"NF"个字段"}' testtttt.txt   #
+
+awk 'BEGIN{i=1}{while(i<NR) print "第"i++"行的时间是:"$1"共有"NF"个字段"}' testtttt.txt  #打印所有行的字段和行号
+
+ll | awk 'BEGIN{sum=0}!/^d/{sum+=$5} END {print sum/1024/1024,"MB"}'  #当前文件除文件夹，所有文件总大小
+
+
+
+
+
+
+

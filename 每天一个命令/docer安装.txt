@@ -1,0 +1,13 @@
+安装docker-ce:
+
+
+yum install -y yum-utils device-mapper-persistent-data lvm2
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+yum install docker-ce docker-ce-cli containerd.io -y
+
+注意：
+docker-ce-cli  作用是docker命令行工具包
+containerd.io  作用是窗口接口相关包
+yum info 	        软件包的名字，可以查看一个包的具体作用
+
+# 得知一个包的作用：yum info php-mysql

@@ -1,0 +1,367 @@
+Linux sed 命令  https://www.linuxprobe.com/linux-sed-command.html
+
+### 查两行之间：
+sed -n '/11/,/44/p' file.txt
+sed -n '/DROP TABLE IF EXISTS `alipay_account_detail`;/,/UNLOCK TABLES;/p'  /data/bak>/data/alipay_account_detail
+
+使用正则表达式。
+sed -n ‘/2010-11-17 09:[0-9][0-9]:[0-9][0-9]/,/2010-11-17 16:[0-9][0-9]:[0-9][0-9]/p’  logfile
+
+
+
+{# mysql 导出与导入
+整库备份导出：mysqldump -uroot -p --databases balance_bak > /data/bak
+单表导出：mysqldump -uroot -proot balance_bak tower_cdr_prepare > /data/tower_cdr_prepare
+整库导入：mysql -uroot -p < /data/balance_bak 
+系统中导入表：mysql -uroot -proot balance_bak < /data/wx_account_gather          or    /data/wx_account_gather
+}
+
+```sql
+--语法： sed [-hnV][-e<script>][-f<script文件>][文本文件]
+```
+
+
+
+#调用sed命令有两种形式：  
+*   sed [options] 'command' file(s)  
+*   sed [options] -f scriptfile file(s)  
+
+参数说明：
+
+-e<script>或--expression=<script> 以选项中指定的script来处理输入的文本文件。
+-f<script文件>或--file=<script文件> 以选项中指定的script文件来处理输入的文本文件。
+-h或--help 显示帮助。
+-n或--quiet或--silent 仅显示script处理后的结果。
+-V或--version 显示版本信息。
+动作说明：
+
+a ：新增， a 的后面可以接字串，而这些字串会在新的一行出现(目前的下一行)～
+c ：取代， c 的后面可以接字串，这些字串可以取代 n1,n2 之间的行！
+d ：删除，因为是删除啊，所以 d 后面通常不接任何咚咚；
+i ：插入， i 的后面可以接字串，而这些字串会在新的一行出现(目前的上一行)；
+p ：打印，亦即将某个选择的数据印出。通常 p 会与参数 sed -n 一起运行～
+s ：取代，可以直接进行取代的工作哩！通常这个 s 的动作可以搭配正规表示法！例如 1,20s/old/new/g 就是啦！
+
+
+
+【实例】
+
+#在testfile文件的第四行后添加一行，并将结果输出到标准输出，在命令行提示符下输入如下命令：
+sed -e 4a\newLine testfile 
+
+#以行为单位的新增/删除
+将 /etc/passwd 的内容列出并且列印行号，同时，请将第 2~5 行删除！
+ nl /etc/passwd | sed '2,5d'     # 没有 -e 也行啦！同时也要注意的是， sed 后面接的动作，请务必以 '' 两个单引号括住喔！
+
+只要删除第 2 行
+nl /etc/passwd | sed '2d'
+
+要删除第 3 到最后一行
+nl /etc/passwd | sed '3,$d'
+
+在第二行后(亦即是加在第三行)加上『drink tea?』字样！
+sed -e '2a drint tea?' testtttt.txt 
+
+那如果是要在第二行前
+如果是要增加两行以上，在第二行后面加入两行字，例如 Drink tea or ..... 与 drink beer?
+sed -e '2a drink tea? \n drink bear' testtttt.txt |nl
+
+ nl testtttt.txt | sed '2i drint tea? or\  #命令行换行
+drink bear?'
+每一行之间都必须要以反斜杠『 \ 』来进行新行的添加喔！所以，上面的例子中，我们可以发现在第一行的最后面就有 \ 存在。
+
+
+### 以行为单位的替换与显示
+将第2-5行的内容取代成为『No 2-5 number』呢？
+nl testtttt.txt | sed '2,5c no 2-5 number'
+
+# 仅列出 /etc/passwd 文件内的第 5-7 行
+nl testtttt.txt  | sed -n '2,5p' 
+
+
+### 数据的搜寻并显示
+搜索 /etc/passwd有root关键字的行
+nl /etc/passwd | sed -n '/root/p'
+
+
+###数据的搜寻并删除
+删除/etc/passwd所有包含root的行，其他行输出
+nl /etc/passwd | sed '/root/d' 
+
+###数据的搜寻并执行命令
+搜索/etc/passwd,找到root对应的行，执行后面花括号中的一组命令，每个命令之间用分号分隔，这里把bash替换为blueshell，再输出这行：
+nl /etc/passwd | sed -n '/root/{s/bash/blueshell/;p;q}'     # 最后的q是退出
+
+###数据的搜寻并替换
+除了整行的处理模式之外， sed 还可以用行为单位进行部分数据的搜寻并取代。基本上 sed 的搜寻与替代的与 vi 相当的类似！他有点像这样：
+sed 's/要被取代的字串/新的字串/g'
+ifconfig |grep "inet 192"|sed 's/^.*inet//g' | sed 's/netma.*$//g' |nl -n rz -w 5 
+
+
+### 多点编辑
+一条sed命令，删除/etc/passwd第三行到末尾的数据，并把bash替换为blueshell
+nl /etc/passwd | sed -e '3,$d' -e 's/bash/blueshell/'
+-e表示多点编辑，第一个编辑命令删除/etc/passwd第三行到末尾的数据，第二条命令搜索bash替换为blueshell。
+
+
+###直接修改文件内容(危险动作)
+sed 可以直接修改文件的内容，不必使用管道命令或数据流重导向！ 不过，由於这个动作会直接修改到原始的文件，所以请你千万不要随便拿系统配置来测试！ 我们还是使用文件 regular_express.txt 文件来测试看看吧！
+
+#### 将 regular_express.txt 内每一行结尾若为 . 则换成 !
+
+sed -i 's/\.$/\!/g' regular_express.txt
+
+#利用 sed 直接在 regular_express.txt 最后一行加入 # This is a test:
+利用 sed 直接在 regular_express.txt 最后一行加入 # This is a test:
+
+由於 $ 代表的是最后一行，而 a 的动作是新增，因此该文件最后新增 # This is a test！
+
+sed 的 -i 选项可以直接修改文件内容，这功能非常有帮助！举例来说，如果你有一个 100 万行的文件，你要在第 100 行加某些文字，此时使用 vim 可能会疯掉！因为文件太大了！那怎办？就利用 sed 啊！透过 sed 直接修改/取代的功能，你甚至不需要使用 vim 去修订！
+
+
+### 插入空行
+sed '1a \ \n\n\n\n\n\n\n\n\n' testtttt.txt | nl -b a  
+
+
+
+=======================
+
+sed之G、H、g、h使用
+前言
+
+作者不善言谈，如有错误请指正！！！
+
+转载请注明出处！！！
+
+sed之G、H、g、h使用
+
+什么是sed？
+
+sed是面向流的行编辑器，所谓面向流，是指接受标准输入的输入，输出内容到标准输出上。
+
+sed如何处理数据？
+
+sed在正常情况下，将处理的行读入模式空间（pattern space），脚本中的“sed-command（sed命令）”就一条接着一条进行处理，知道脚本执行完毕。然后该行呗输出，模式（pattern space）被清空；接着，在重复执行刚才的动作，文件中的新的一行被读入，直到文件处理完毕。
+
+ 
+
+什么是Pattern Space，什么是Hold Space？
+
+pattern space相当于车间sed把流内容在这里处理。
+
+hold space相当于仓库，加工的半成品在这里临时储存。
+
+PS：你可以将pattern space看成是一个流水线，所有的动作都是在“流水线”上执行的；而hold space是一个“仓库”，“流水线”上的东东都可以放到这里。
+
+为什么要使用sed高级命令（G、H、g、h、n、N、x）？
+
+由于各种各样的原因，比如用户希望在某个条件下脚本中的某个命令被执行，或者希望模式空间得到保留以便下一次的处理，都有可能使得sed在处理文件的时候不按照正常的流程来进行。这个时候，sed设置了一些高级命令来满足用户的要求。
+
+sed命令：
+
++ g：[address[,address]]g 将hold space中的内容拷贝到pattern space中，原来pattern space里的内容清除
+
++ G：[address[,address]]G 将hold space中的内容append到pattern space\n后
+
++ h：[address[,address]]h 将pattern space中的内容拷贝到hold space中，原来的hold space里的内容被清除
+
++ H：[address[,address]]H 将pattern space中的内容append到hold space\n后
+
++ d：[address[,address]]d 删除pattern中的所有行，并读入下一新行到pattern中
+
++ D：[address[,address]]D 删除multiline pattern中的第一行，不读入下一行
+
+PS：不论是使用G、g还是H、h，它们都是将hold space里面的内容“copy”到pattern space中或者将pattern space中的内容“copy”到hold space中。
+
+附上英文的解释（注意其中的高亮单词）：
+
+The "h" command copies the pattern buffer into the hold buffer. The pattern buffer is unchanged.
+
+Instead of exchanging the hold space with the pattern space, you can copy the hold space to the pattern space with the "g" command. This deletes the pattern space. If you want to append to the pattern space, use the "G" command. This adds a new line to the pattern space, and copies the hold space after the new line.
+
+ 
+
+示例：用sed模拟出tac的功能（倒序输出）。
+
+文件内容
+
+cat mm
+
+1
+
+2
+
+3
+
+ 
+
+解决方法：
+
+sed ‘1!G;h;$!d’mm
+ps：1!G第1行不 执行“G”命令，从第2行开始执行。
+
+       $!d，最后一行不删除（保留最后1行）
+
+图解分析过程
+
+P：Pattern Space
+
+H：Hold Space
+
+蓝色：Hold Space中的数据
+
+绿色：Pattern Space中的数据
+
+======================================
+
+
+https://www.cnblogs.com/irockcode/p/8018575.html
+
+
+sed,n,N,d,D,p,P,h,H,g,G,x,解析
+原文地址
+
+这篇文章主要是我参考命令的，直接复制粘贴，有问题请拍砖
+
+A. sed执行模板=sed ‘模式{命令1;命令2}’ 即逐行读入模式空间，执行命令，最后输出打印出来
+B. p打印当前模式空间所有内容，追加到默认输出之后；P打印当前模式空间开端至\n的内容，并追加到默认输出之前。
+Sed并不对每行末尾\n进行处理，但是对N命令追加的行间\n进行处理，因为此时sed将两行看做一行。
+C. n命令
+
+n命令简单来说就是提前读取下一行，覆盖模型空间前一行，然后执行后续命令。然后再读取新行，对新读取的内容重头执行sed。
+
+例子：从aaa文件中取出偶数行
+[root@localhost ~]# cat a.txt
+This is 1   
+This is 2   
+This is 3   
+This is 4   
+This is 5
+[root@localhost ~]# sed –n ‘n;p’ a.txt
+This is 2   
+This is 4   
+[root@localhost ~]#
+注释：
+	读取This is 1，执行n命令，此时模式空间为This is 2，
+	执行p，	打印模式空间内容This is 2，之后读取This is 3，
+	执行n命令，此时模式空间为This is 4，
+	执行p，打印模式空间内容This is 4，之后读取This is 5，
+	执行n命令，因为没有了，所以退出，并放弃p命令。
+	因此，最终打印出来的就是偶数行。
+N命令简单来说就是追加下一行到模式空间，同时将两行看做一行，但是两行之间依然含有\n换行符，然后执行后续命令。然后再读取新行，对新读取的内容重头执行sed。此时，新读取的行会覆盖之前的行（之前的两行已经合并为一行）。
+
+例子：从aaa文件中读取奇数行
+[root@localhost ~]# sed –n ‘N;P’ a.txt   -----因为读取第5行时，执行N，发现没有第6行，不满足，就退出，放弃P命令
+This is 1   
+This is 3   
+[root@localhost ~]# sed –n ‘$!N;P’ a.txt   
+This is 1   
+This is 3   
+This is 5
+[root@localhost ~]#
+注释中1代表This is 1;2代表This is 2 以此类推
+注释：
+	读取1，$!条件满足（不是尾行），执行N命令，得出1\n2，执行P，打印得1，
+	读取3，$!条件满足（不是尾行），执行N命令，得出3\n4，执行P，打印得3，
+	读取5，$!条件不满足，跳过N，执行P，打印得5
+D. d命令
+
+d命令是删除当前模式空间内容（不再传至标准输出）， 并放弃之后的命令，并对新读取的内容，重头执行sed。
+
+[root@localhost ~]# sed ‘n;d’ a.txt 
+This is 1   
+This is 3   
+This is 5
+[root@localhost ~]#
+注释:
+	读取1，执行n，得出2，执行d，删除2，得空，
+	以此类推，读取3，执行n，得出4，执行d，删除4，得空，
+	但是读取5时，因为n无法执行，所以d不执行。因无-n参数，故输出1\n3\n5
+D命令是删除当前模式空间开端至\n的内容（不在传至标准输出）， 放弃之后的命令，但是对剩余模式空间重新执行sed。
+
+Sed ‘N;D’ aaa           
+This is 5
+注释:
+	读取1，执行N，得出1\n2，执行D，得出2，执行N，得出2\n3，执行D，得出3，
+	依此类推，得出5，执行N，条件失败退出，因无-n参数，故输出5
+E. y命令：对之前匹配的字符逐个替换
+
+[root@localhost ~]# awk ‘{print $0”h”}’ a.txt | sed ‘y/his/HIS/’
+THIS IS 1H
+THIS IS 2H
+THIS IS 3H
+THIS IS 4H
+THIS IS 5H
+[root@localhost ~]#
+此外，如果需要对某个字符串进行大小写转换，则可使用如下方法    
+sed ‘s/\b[a-z]\b/\u&/g’ ddd   
+This is A and A is 1   
+This is B and B is 2   
+This is C and C is 3   
+This is D and D is 4   
+This is E and E is 5	 
+F. h命令，H命令，g命令，G命令
+
+h命令是将当前模式空间中内容覆盖至缓存区，
+H命令是将当前模式空间中的内容追加至缓存区
+g命令是将当前缓存区中内容覆盖至模式空间，
+G命令是将当前缓存区中的内容追加至模式空间
+
+[root@wmsvmpc ~]# sed –e ‘/101/h’ –e ‘$G’ cs1.txt 
+PBCSPOFT0101    6
+PBCSPOFT0102    0
+PBCSPOFT0103    8
+PB\CSPOFT0104    0
+PBCSPOFT0101    6
+[root@wmsvmpc ~]#
+在sed处理文件的时候，每一行都被保存在一个叫模式空间的临时缓冲区中，
+	除非行被删除或者输出被取消，否则所有被处理的行都将打印在屏幕上。
+	接着模式空间被清空，并存入新的一行等待处理。
+	在上面的例子里，匹配test的行被找到后，将存入模式空间，
+	h命令将其复制并存入一个称为保持缓存区的特殊缓冲区内。
+第二条语句的意思是，当到达最后一行后，G命令取出保持缓冲区的行，
+	然后把它放回模式空间中，然后被打印（也就末尾）。
+[root@wmsvmpc ~]# sed –e ‘/101/h’ –e ‘/102/G’ cs1.txt   #追加到包含102的行的下一行
+PBCSPOFT0101    6
+PBCSPOFT0102    0
+PBCSPOFT0101    6
+PBCSPOFT0103    8
+PB\CSPOFT0104    0
+
+
+将ddd文件中数字和字母互换，并将字母大写 
+cat ddd.sed
+h  
+{  
+s/.*is \(.*\) and .*/\1/  
+y/abcde/ABCDE/
+G  
+s/\(.*\)\n\(.*is \).*\(and \).*\(is \)\(.*\)/\2\5 \3\5 \4\1/  
+}  
+                                           
+sed –f ddd.sed ddd  
+This is 1 and 1 is A  
+This is 2 and 2 is B  
+This is 3 and 3 is C  
+This is 4 and 4 is D  
+This is 5 and 5 is E
+注释:
+	读取1，执行h，复制到缓存区，执行s，模式空间得到匹配到的字母a，
+	然后执行y，将a转成A，执行G，追加缓存区内容到模式空间，得A\nThis is a and a is 1；
+	执行s，重新排列，得出This is 1 and 1 is A；以此类推，得出结果。
+	这里需要注意的是匹配的内容中，空格一定要处理好，
+	空格处理不对，会造成第二次s匹配错误，无法执行重新排列或排列错误
+G. x命令
+
+x命令是将当前缓存区和模式空间内容互换
+[root@wmsvmpc ~]# sed –e ‘/101/h’ –e ‘/102/x’ cs1.txt   #互换模式空间和保持缓冲区的内容。也就是把包含101与102的行互换。应该是替换，待百度
+PBCSPOFT0101    6
+PBCSPOFT0101    6
+PBCSPOFT0103    8
+PB\CSPOFT0104    0
+
+
+[root@wmsvmpc ~]#  echo –e “a\nb\nc\nd\n”|sed –nr ‘H;${x;s/\n//g;p}’
+abcd
+r：use extended regular expressions in the script，使用功能更强大的正则表达式。
+${} 表示处理到文件最后一行时执行{}中的命令，x把之前存入缓存区的数据按先入先出的顺序放入模式空间，然后做替换，最后打印

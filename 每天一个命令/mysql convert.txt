@@ -1,0 +1,29 @@
+MySQL CAST与CONVERT 函数的用法
+MySQL 的CAST()和CONVERT()函数可用来获取一个类型的值，并产生另一个类型的值。两者具体的语法如下：
+
+字符集转换 :  CONVERT(xxx  USING   gb2312)
+
+
+CAST(value as type);
+CONVERT(value, type);
+就是CAST(xxx AS 类型), CONVERT(xxx,类型)。
+
+二进制，同带binary前缀的效果 : BINARY    
+字符型，可带参数 : CHAR()     
+日期 : DATE     
+时间: TIME     
+日期时间型 : DATETIME     
+浮点数 : DECIMAL      
+整数 : SIGNED     
+无符号整数 : UNSIGNED 
+
+
+下面举几个例子：
+
+SELECT CAST('3.35' AS signed);
+SELECT CONVERT('3.35',signed);
+
+SELECT CONVERT('23',SIGNED);
+SELECT CAST('125e342.83' AS signed);
+SELECT CAST('3.35' AS signed);
+

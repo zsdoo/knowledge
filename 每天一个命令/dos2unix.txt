@@ -1,0 +1,116 @@
+dos2unix
+https://www.cnblogs.com/kerrycode/p/5077969.html
+
+命令简介：
+
+dos2unix是将Windows格式文件转换为Unix、Linux格式的实用命令。Windows格式文件的换行符为\r\n ,而Unix&Linux文件的换行符为\n. dos2unix命令其实就是将文件中的\r\n 转换为\n。
+
+而unix2dos则是和dos2unix互为孪生的一个命令，它是将Linux&Unix格式文件转换为Windows格式文件的命令。
+
+
+
+命令语法：
+
+dos2unix [options] [-c convmode] [-o file ...] [-n infile outfile ...]
+unix2dos [options] [-c convmode] [-o file ...] [-n infile outfile ...]
+
+
+命令参数：
+
+此命令参数是Red Hat Enterprise Linux Server release 5.7下dos2unix命令参数，不同版本Linux的dos2nnix命令参数有可能不同。
+
+-h 显示命令dos2unix联机帮助信息。
+
+-k 保持文件时间戳不变
+
+-q 静默模式，不输出转换结果信息等
+
+-V 显示命令版本信息
+
+-c 转换模式
+
+-o 在源文件转换，默认参数
+
+-n 保留原本的旧档，将转换后的内容输出到新档案.默认都会直接在原来的文件上修改，
+
+
+【实例】
+
+#
+cat -v test.sh 
+dos2unix test.sh
+
+#
+dos2unix 可以一次转换多个文件
+dos2unix filename1 filename2 filename3
+
+#如果需要保留源文件，那么可以使用参数-n dos2unix -n oldfilename newfilename
+dos2unix -n dosfile linuxfile
+
+   1: [root@DB-Server myscript]# dos2unix -n dosfile linuxfile
+   2: dos2unix: converting file dosfile to file linuxfile in UNIX format ...
+   3: [root@DB-Server myscript]# cat -v dosfile 
+   4: it is a windows dos file^M
+   5: you should convert to unix&linux format^M
+   6: [root@DB-Server myscript]# cat -v linuxfile 
+   7: it is a windows dos file
+
+
+
+########################### dos2unix命令其实就是将文件中的\r\n 转换为\n。  cat -v 查看格式 
+
+
+yum list | grep -i dos2unix
+yum install dos2unix.x86_64
+dos2unix ENERGY_ACCOUNT_20200908_001.csv
+vim !$     #!$表示获取上一条命令的最后一部分。
+
+
+
+#
+[root@app-crm-1 bak]# yum list | grep -i dos2unix
+dos2unix.x86_64                         6.0.3-7.el7                    local    
+[root@app-crm-1 bak]# yum install dos2unix.x86_64
+Resolving Dependencies
+--> Running transaction check
+---> Package dos2unix.x86_64 0:6.0.3-7.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==========================================================================================================================================================
+ Package                              Arch                               Version                                  Repository                         Size
+==========================================================================================================================================================
+Installing:
+ dos2unix                             x86_64                             6.0.3-7.el7                              local                              74 k
+
+Transaction Summary
+==========================================================================================================================================================
+Install  1 Package
+
+Total download size: 74 k
+Installed size: 190 k
+Is this ok [y/d/N]: y
+Downloading packages:
+dos2unix-6.0.3-7.el7.x86_64.rpm                                                                                                    |  74 kB  00:00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : dos2unix-6.0.3-7.el7.x86_64                                                                                                            1/1 
+  Verifying  : dos2unix-6.0.3-7.el7.x86_64                                                                                                            1/1 
+
+Installed:
+  dos2unix.x86_64 0:6.0.3-7.el7                                                                                                                           
+
+Complete!
+[root@app-crm-1 bak]# ls -lrt
+total 16
+-rw-r--r-- 1 root root 130 Sep  8 11:31 ENERGY_ACCOUNT_20200908_003.csv
+-rw-r--r-- 1 root root 232 Sep  8 11:31 ENERGY_ACCOUNT_20200908_001.csv
+-rw-r--r-- 1 root root  56 Sep  8 11:31 ENERGY_ACCOUNT_SUM_20200908_003.csv
+-rw-r--r-- 1 root root  57 Sep  8 11:31 ENERGY_ACCOUNT_SUM_20200908_001.csv
+[root@app-crm-1 bak]# dos2unix ENERGY_ACCOUNT_20200908_001.csv
+dos2unix: converting file ENERGY_ACCOUNT_20200908_001.csv to Unix format ...
+[root@app-crm-1 bak]# vim !$
+

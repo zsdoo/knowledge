@@ -1,0 +1,56 @@
+导入文件：
+
+# 错误：
+1 ERROR 1300 (HY000): Invalid utf8 character string: ''
+  解决 :将filename.csv、filename.txt另存为utf-8格式的文件。
+2 ERROR 1148 (42000): The used command is not allowed with this MySQL version
+解决 : 在登陆时：mysql --local-infile=1 -uroot -proot
+
+
+## 查看文件位置
+SHOW VARIABLES LIKE '%secure%';
+
+## 查看导入文件功能是否开启
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+set global local_infile = 'ON';   或者 set global local_infile =1;
+
+## 设置为1后，可从mysql命令行导入
+SET GLOBAL local_infile=1;
+
+## 在从mysql命令行导入  ！！！注意回车符，在8.0 中用：\r\n
+LOAD DATA LOCAL INFILE '/var/lib/mysql-files/ENERGY_ACCOUNT_20200813_001-100.txt' 
+INTO TABLE `balance`.`energy_account_detail` FIELDS TERMINATED BY '|' LINES TERMINATED BY '|\r\n';
+
+LOAD DATA LOCAL INFILE '/var/lib/ENERGY_ACCOUNT_20200813_001-100.txt' 
+INTO TABLE `balance`.`energy_account_detail` FIELDS TERMINATED BY '|' LINES TERMINATED BY '|\r\n';
+
+### 从CRT命令行导入：
+mysql -P3306 --local-infile=1 -uroot -p'root' -Dbalance -e "LOAD DATA LOCAL INFILE '/var/lib/mysql-files/ENERGY_ACCOUNT_20200813_001-100.txt'  INTO TABLE energy_account_detail FIELDS TERMINATED BY '|' LINES TERMINATED BY '|\r\n'";
+
+
+计费配置：/etc/my.cnf
+
+[root@localhost mysql]# cat /etc/my.cnf
+[mysqld]
+max_connections = 1500
+basedir = /usr/local/mysql
+datadir = /data/mysqldata
+federated
+port = 3306
+sql_mode=NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES
+character_set_server=utf8
+init_connect='SET NAMES utf8'
+log-error=/usr/local/mysql/logs/mysqld.log
+pid-file=/usr/local/mysql/logs/mysqld.pid
+skip-name-resolve
+binlog-ignore-db=backup
+server-id=16
+log-bin=mysql-bin
+log-slave-updates
+sync_binlog=1
+auto_increment_increment=2
+auto_increment_offset=1
+relay-log=relay1-log-bin
+relay-log-index=slave-relay1-bin.index
+lower_case_table_names=1
+innodb_buffer_pool_size=161061273600

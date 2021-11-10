@@ -1,0 +1,69 @@
+查看CPU核数
+	cat /proc/cpuinfo |grep "processor"|sort -u|wc -l
+查看内存总数
+	cat /proc/meminfo | grep MemTotal
+	32875640=32M
+查看硬盘大小
+	df -h
+
+
+
+查CPU，内存及硬盘信息
+
+192.168.29.6 16C/32G/340G
+192.168.29.7 16C/32G/340G
+192.168.29.8 16C/32G/340G
+192.168.29.9 16C/32G/340G
+192.168.29.10 32C/128G/410T
+172.16.40.253:/backup  400T 
+
+
+
+
+6-9 =331.79M
+
+[readonly@ctc_res_resapp05 ~]$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/vda3              16G  4.2G   11G  29% /
+tmpfs                  16G     0   16G   0% /dev/shm
+/dev/vda1             190M   40M  141M  22% /boot
+/dev/mapper/VolGroup02-lv_app02
+                      296G  206G   75G  74% /app
+/app/rhel-server-6.7-x86_64-dvd.iso
+                      3.6G  3.6G     0 100% /media/cdrom
+
+
+
+10  =4T
+[readonly@ctc_res_resapp07 ~]$ cat /proc/cpuinfo |grep "processor"|sort -u|wc -l
+32
+[readonly@ctc_res_resapp07 ~]$ cat /proc/meminfo | grep MemTotal
+MemTotal:       132108564 kB
+[readonly@ctc_res_resapp07 ~]$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup-LogVol00
+                      314G   90G  208G  31% /
+tmpfs                  63G   72K   63G   1% /dev/shm
+/dev/sda1             477M   44M  408M  10% /boot
+/home/rhel-server-6.7-x86_64-dvd.iso
+                      3.6G  3.6G     0 100% /media/cdrom
+/dev/mapper/VolGroup01-lv_app01
+                      3.7T  418G  3.1T  12% /app
+
+172.16.40.253:/backup
+                      400T  363T   38T  91% /bak0517
+
+============================
+查看内核版本命令
+
+ 1) cat /proc/version 
+
+ 2)uname -a 
+
+查看linux版本：
+
+ 1)lsb_release -a 
+
+ 2) cat /etc/redhat-release
+
+

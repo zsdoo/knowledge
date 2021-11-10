@@ -1,0 +1,230 @@
+安装mysql
+https://www.cnblogs.com/wendy-0901/p/12673705.html
+
+
+一、下载Mysql
+下载地址：https://downloads.mysql.com/archives/community/
+
+
+ 二、环境配置
+
+检测系统是否自带Mysql
+
+# rmp -qa|grep mysql
+如果有进行强行卸载
+
+# rpm -e --nodeps mysql-libs-5.1.52-1.el6_0.1.x86_64
+
+检测系统是否自带mariadb
+
+# rpm -qa|grep mariadb
+
+# rpm -e --nodeps mariadb-libs-5.5.64-1.el7.x86_64
+
+
+# rpm -e --nodeps mariadb-5.5.64-1.el7.x86_64
+
+
+# rpm -e --nodeps mariadb-server-5.5.64-1.el7.x86_64
+
+
+
+三、安装
+
+进入/data/software/目录下解压
+
+# tar -zxvf mysql-5.7.28.tar.gz
+
+
+ 解压完成后重命名
+
+# mv mysql-5.7.28-linux-glibc2.12-x86_64 mysql-5.7.28
+# mv mysql-5.7.28 /usr/local/
+
+ 
+
+ 检查mysql组和用户是否存在，如果没有则创建
+
+cat /etc/group|grep mysql
+
+groupadd mysql
+
+useradd -r -g mysql mysql　　#useradd -r参数表示mysql用户是系统用户，不可用于登录系统
+
+ 
+
+安装数据库
+
+创建data目录
+
+cd 
+
+/usr/local/mysql-5.7.28
+
+mkdir data
+
+
+ 将/usr/local/mysql-5.7.28的所有者及所属组改为mysql
+
+# chown -R mysql.mysql /usr/local/mysql-5.7.28
+
+
+ 
+
+ 在/usr/local/mysql-5.7.28/support-files目录下创建my_default.cnf
+
+# vim my_default.cnf
+
+ 
+
+[mysqld]
+
+#设置mysql的安装目录
+basedir =/usr/local/mysql-5.7.28
+#设置mysql数据库的数据存放目录
+datadir = /usr/local/mysql-5.7.28/data
+#设置端口
+port = 3306
+
+socket = /tmp/mysql.sock
+#设置字符集
+character-set-server=utf8
+#日志存放目录
+log-error = /usr/local/mysql-5.7.28/data/mysqld.log
+pid-file = /usr/local/mysql-5.7.28/data/mysqld.pid
+#允许时间类型的数据为零(去掉NO_ZERO_IN_DATE,NO_ZERO_DATE)
+sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+#ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+ 
+
+拷贝，是否覆盖，是
+
+# cp my_default.cnf /etc/my.cnf
+
+
+
+ 初始化Mysql
+
+# ./bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql-5.7.28/ --datadir=/usr/local/mysql-5.7.28/data/
+
+ 
+
+ 如果报错：./bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object file: No such file or 就安装libaio，如果没有则跳过
+
+ yum install libaio
+
+ 
+
+ 初始化完成之后查看日志
+
+cat /usr/local/mysql-5.7.28/data/mysqld.log，蓝框里的是临时密码
+
+
+把启动脚本放到开机初始化目录
+
+cp support-files/mysql.server /etc/init.d/mysql
+
+
+ 启动mysql
+
+service mysql start
+
+
+
+进入mysql并更改密码
+
+cd /usr/local/mysql-5.7.28
+
+./bin/mysql -u root -p
+
+mysql> set password=password('123456');
+
+mysql> grant all privileges on *.* to root@'%' identified by '123456';
+
+mysql> flush privileges;
+
+添加远程访问权限
+
+mysql> use mysql;
+
+mysql> update user set host='%' where user = 'root';
+
+mysql> flush privileges;
+
+如果更改时报错：ERROR 1062 (23000): Duplicate entry '%-root' for key 'PRIMARY'，就先查询一下是否已更改，最后执行刷新。
+
+ 
+
+ 重启mysql生效
+
+service mysql restart
+
+
+-------------------------------------------------------------------------------------------------------------
+忘密码及更改密码：
+
+
+1.先将MySQL停止、
+
+命令：systemctl  stop mysqld       #停掉MySQL
+
+命令：systemctl status mysqld         #查看状态
+
+2.然后跳过授权表启动MySQL服务程序
+
+这一步主要利用mysqld的 --skip-grant-tables选项
+
+修改my.cnf配置，添加 skip_grant_tables=1启动设置：
+
+打开/etc/my.cnf配置文件
+
+添加skip_grant_tables 一行，然后保存退出
+
+
+3.然后启动MySQL并查看状态
+
+命令：systemctl  start    mysqld 
+
+
+4.使用mysql命令连接到MySQL服务，重设root的密码
+
+由于前一步启动的MySQL服务跳过了授权表，所以可以root从本机直接登录
+
+在命令行内直接输入mysql即可
+
+
+
+5.进入 mysql> 环境后，通过修改mysql库中user表的相关记录，重设root用户从本机登录的密码：
+
+命令：update mysql.user set authentication_string=password('123qqq...A')   where user='root' and host='localhost';
+
+                                 #重新设置密码
+
+命令：FLUSH PRIVILEGES;          #刷新授权列表
+
+然后输入  exit  退出mysql
+
+注意：通过执行“FLUSH PRIVILEGES;”可使授权表立即生效，对于正常运行的MySQL服务，也可以用上述方法来修改密码，不用重启服务。本例中因为是恢复密码，最好重启MySQL服务程序，所以上述“FLUSH PRIVILEGES;”操作可跳过。
+
+
+
+6.重新以正常方式启动MySQL服务程序，验证新密码
+
+   如果前面是修改/etc/my.cnf配置的方法来跳过授权表，则重置root密码后，应去除相应的设置以恢复正常：
+7.重置后的新密码，才能成功登入（试试新鲜出炉的密码吧）：
+
+
+更改密码：
+
+update mysql.user set authentication_string=password('123qqq...A')   where user='root' and host='localhost';
+set password for root@localhost=password('1234567');
+set password=password('123456');
+
+###创建数据库：
+
+CREATE DATABASE IF NOT EXISTS test_db_char
+     DEFAULT CHARACTER SET utf8
+    DEFAULT COLLATE utf8_general_ci;
+
+SHOW CREATE DATABASE test_db_char;

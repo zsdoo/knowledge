@@ -1,0 +1,1467 @@
+
+启动python
+C:\Users\86132>python
+Python 3.7.6 (tags/v3.7.6:43364a7ae0, Dec 19 2019, 00:42:30) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print ('hello world')
+hello world
+>>>
+
+退出 ：quit(); exit();先按Ctrl+z，然后回车即可；
+
+
+====
+字符串取值：
+In [8]: s1 =  "shark"
+取连续值：切片  [start:end:step]
+In [13]: s1[0:3]
+Out[13]: 'sha'
+
+
+====
+列表： list()
+In [69]: li=[]
+
+In [70]: type(li)
+Out[70]: list
+
+In [71]: li=['一个','二个']
+
+嵌套列表：
+In [76]: l3= [ [],[]]
+
+In [77]: len(l3)
+Out[77]: 2
+
+In [78]: l3 =  [  ['one','two'],[1,2,3]]
+
+
+====
+元组 是相对不可变的  元组是用逗号创建的
+
+In [171]: t1=()
+
+In [172]: type(t1)
+Out[172]: tuple
+
+In [175]: t = 3,
+
+In [177]: t
+Out[177]: (3,)
+
+In [178]: type(t)
+Out[178]: tuple
+
+
+====
+字典：键值对 dict{}
+{1:'整型',1.1:'浮点型',False:'布尔值','abc':'字符串',(1,2):'元组'}
+In [26]: d3 = { 'a': 1,'b':2}
+
+In [62]: l=[{'a':1},{2:2}]
+
+In [63]: l[0]
+Out[63]: {'a': 1}
+
+
+====
+创建集合 ？只有Key 的字典（不允许重复）
+
+In [1]: type({1,2})
+Out[1]: set
+
+In [2]: {1,1}
+Out[2]: {1}
+
+In [3]: {1,True}
+Out[3]: {1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+yum groupinstall "Development Tools"
+
+下载： wget https://www.python.org/ftp/python/3.7.6/Python-3.7.6.tar.xz
+
+
+yum -y install zlib-devel bzip2-devel openssl-devel sqlit-devel readline-devel libffi-devel
+
+tar -xvf Python-3.7.6.tar.xz
+
+ cd Python-3.7.6
+ 
+sed -ri 's/^#readline/readline/' Modules/Setup.dist
+sed -ri 's/^#(SSL=)/\1/' Modules/Setup.dist
+sed -ri 's/^#(ssl=)/\1/' Modules/Setup.dist
+sed -ri 's/^#([\t]*-DUSE)/\1/' Modules/Setup.dist
+sed -ri 's/^#([\t]*-L\$\(SSL\))/\1/' Modules/Setup.dist
+
+
+
+编译安装：
+./configure --enable-shared
+make -j 2 && make install
+
+
+配置环境
+cmd1='export LD_LIBRARY_PATH='
+cmd2='$LD_LIBRARY_PATH:/usr/local/lib'
+file="/etc/profile.d/python3_lib.sh"
+echo "${cmd1}${cmd2}" > $file
+
+echo "export LD_LIBRARY_PATH=LD_LIBRARY_PATH:/usr/local/lib" > /etc/profile.d/python3_lib.sh
+
+path="/usr/local/lib"
+file2="/etc/ld.so.conf.d/python3.conf"
+echo ${path}> $file2
+
+echo "/usr/local/lib" > /etc/ld.so.conf.d/python3.conf
+
+生效：
+ldconfig
+source /etc/profile
+
+测试安装
+python3 -V
+
+退出：>>> exit()
+
+
+D2J:
+===
+
+mkdir ~/.pip
+
+echo '[global]' >> ~/.pip/pip.conf
+echo "index-url=https://mirrors.aliyun.com/pypi/simple" >> ~/.pip/pip.conf
+
+pip3 install ipython
+
+
+D3J
+===
+!vi hello.py
+print("hello world")
+
+%run hello.py
+
+
+VScode 运行==========
+print("hello laoKy")
+
+In [1]: n = input("请输入一个数字:")
+111:19
+	n = int(n)
+In [2]: if n==18:
+   ...:     print("相等")
+   ...: elif n>18:
+   ...:     print("大了")
+   ...: elif n<18:
+   ...:     print("小了")
+   
+   
+   
+In [11]: n1,n2='12'
+
+In [12]: n1
+Out[12]: '1'
+
+In [13]: n2
+Out[13]: '2'
+
+In [14]: num,s = [10,'hello k']
+
+In [15]: num
+Out[15]: 10
+
+In [16]: s
+Out[16]: 'hello k'
+
+
+n = 10  # 赋值
+n == 10 # 等于 判断
+
+
+#4 查看一个数据类型 内置的（工厂函数）type
+In [36]: type(1000)
+Out[36]: int
+
+In [35]: type(1.1)
+Out[35]: float
+
+
+In [38]: type(True)
+Out[38]: bool
+
+In [39]: type(False)
+Out[39]: bool
+
+
+In [40]: type('1234')
+Out[40]: str
+
+In [41]: type(b'hello')
+Out[41]: bytes
+
+
+
+#5 类型转换
+
+转为int
+int('10')
+int('1.9')
+
+转换为float
+float(1)
+float('1.1')
+
+所有的都可以转为str
+str()
+
+In [45]: str(b'hello', encoding='utf-8')
+Out[45]: 'hello'
+
+转为二进制
+In [46]: bytes('千峰', encoding=('utf=8'))
+Out[46]: b'\xe5\x8d\x83\xe5\xb3\xb0'
+
+In [47]: str(b'\xe5\x8d\x83\xe5\xb3\xb0', encoding='utf-8')
+Out[47]: '千峰'
+
+
+#6 if 判断   当满足条件时，后面的条件 将不再判断
+In [48]: n=input("请输入一个数字：")
+请输入一个数字：8
+
+In [49]: type(n)
+Out[49]: str
+
+In [50]: n=int(n)
+
+In [51]: n
+Out[51]: 8
+
+
+In [53]: 
+
+In [53]: if n==8:
+    ...:     print('相等')
+    ...:     print('答对了')
+    ...: 
+相等
+答对了
+
+
+
+In [54]: n=10
+
+In [55]: if n==18:
+    ...:     print('相等')
+    ...:     print('答对了')
+    ...: else:
+    ...:     print("不相等")
+    ...: 
+不相等
+
+
+
+
+In [59]: n=12
+
+In [60]: if n==18:
+    ...:     print('相等')
+    ...:     print('答对了')
+    ...: elif n>10:
+    ...:     print("大了")
+    ...: elif n<10:
+    ...:     print('小了')
+    ...: elif n==10:
+    ...:     print('OK')
+    ...: 
+大了
+
+
+
+判断真假
+In [61]: n = ''
+
+In [62]: if n:
+    ...:     print("ok")
+    ...: else:
+    ...:     print("no")
+    ...: 
+no
+
+
+三、Python 程序 
+
+
+vi hello.py
+#!/usr/bin/env python3
+# file name hello.py
+
+print("猜数游戏开始")
+
+n = input("请输入一个数字：")
+n = int(n)
+
+if n == 18:
+    print("猜对了")
+elif n > 18:
+    print("猜大了")
+
+else:
+    print("猜小了")
+~                  
+
+
+
+
+
+
+#!/usr/bin/env python3
+# file name hello.py
+
+print("猜数游戏开始")
+while True:
+    n = input("请输入一个数字：")
+    if not n:
+        continue
+    if n=='q':
+        print("退出")
+        break
+    n = int(n)
+
+    if n == 18:
+        print("猜对了")
+        break
+    elif n > 18:
+        print("猜大了")
+
+    else:
+        print("猜小了")
+~                       
+
+
+函数定义
+def 函数名（）：
+
+调用：
+函数名（）：
+
+
+示例：
+
+>>> def foo():
+...     print("我是函数体，只有在调用函数时，这里的代码才会被执行")
+... 
+>>> 
+>>> foo()
+我是函数体，只有在调用函数时，这里的代码才会被执行
+>>> 
+
+
+
+#!/usr/bin/env python3
+# file name hello.py
+def guess_number():
+    print("猜数游戏开始")
+    while True:
+        n = input("请输入一个数字：")
+        if not n:
+            continue
+        if n=='q':
+            print("退出")
+            break
+        n = int(n)
+
+        if n == 18:
+            print("猜对了")
+            break
+        elif n > 18:
+            print("猜大了")
+
+        else:
+            print("猜小了")
+guess_number()
+exit("程序退出")
+
+
+
+
+
+In [1]: file_name="如何拼接字符串"
+
+In [2]: sufix=".txt"
+
+In [3]: file_name=file_name+sufix
+
+In [4]: print(file_name)
+如何拼接字符串.txt
+
+In [5]: file_name
+Out[5]: '如何拼接字符串.txt'
+
+In [6]: '1'*10
+Out[6]: '1111111111'
+
+In [7]: '*'*10
+Out[7]: '**********'
+
+
+
+字符串取值：
+In [8]: s1 =  "shark"
+
+In [9]: s1[0]
+Out[9]: 's'
+
+In [10]: s1[-1]
+Out[10]: 'k'
+
+In [11]: s1[2]
+Out[11]: 'a'
+
+
+
+取连续值：切片  [start:end:step]
+In [13]: s1[0:3]
+Out[13]: 'sha'
+
+
+In [22]: s1[::-1]
+Out[22]: 'krahs'
+
+In [23]: s1[::-2]
+Out[23]: 'kas'
+
+
+长度判断
+In [24]: s3 = "a \n\t"
+
+In [25]: len(s3)
+Out[25]: 4
+
+In [26]: len([1,2,3,4])
+Out[26]: 4
+
+
+In [27]: Line='Size: 8192 MB'
+
+In [29]: 'S' in Line
+Out[29]: True
+
+In [30]: if 'S' in Line:
+    ...:     print(Line)
+    ...: 
+Size: 8192 MB
+
+In [31]: 
+
+
+
+去掉两端的空格：strip
+In [35]: line= '       '+line
+
+In [36]: line
+Out[36]: '       Size: 8192 MB'
+
+In [39]: line
+Out[39]: '       Size: 8192 MB'
+
+In [40]: line.strip()
+Out[40]: 'Size: 8192 MB'
+
+
+按空格分割：split
+In [41]: line
+Out[41]: '       Size: 8192 MB'
+
+In [42]: line.split()
+Out[42]: ['Size:', '8192', 'MB']
+
+In [43]: s='\tab\n'
+
+In [44]: s
+Out[44]: '\tab\n'
+
+In [45]: print(s)
+        ab
+
+
+In [46]: s.split()
+Out[46]: ['ab']
+
+In [47]: s= '\ta b \t c\n'
+
+In [48]: print(s)
+        a b      c
+
+
+In [49]: s.split()
+Out[49]: ['a', 'b', 'c']
+
+
+
+指定“：”为分割符
+In [50]: line
+Out[50]: '       Size: 8192 MB'
+
+In [51]: line.split(':')
+Out[51]: ['       Size', ' 8192 MB']
+
+
+
+In [58]: line
+Out[58]: '       Size: 8192 MB'
+
+In [59]: line.strip()
+Out[59]: 'Size: 8192 MB'
+
+In [60]: line.split()
+Out[60]: ['Size:', '8192', 'MB']
+
+In [61]: line.strip().split(':')   -- 连续执行
+Out[61]: ['Size', ' 8192 MB']
+
+
+替换：.replace('内容','替换为')
+
+In [63]: line.replace(':','')
+Out[63]: '       Size 8192 MB'
+
+判断开头和结尾：
+
+In [65]: line.startswith(' ')
+Out[65]: True
+
+In [66]: line.endswith('MB')
+Out[66]: True
+
+
+======
+列表： list()
+
+
+In [68]: type(l)
+Out[68]: dict
+
+In [69]: li=[]
+
+In [70]: type(li)
+Out[70]: list
+
+In [71]: li=['一个','二个']
+
+In [72]: li
+Out[72]: ['一个', '二个']
+
+In [73]: list['hello']
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-73-09f28bcaad42> in <module>
+----> 1 list['hello']
+
+TypeError: 'type' object is not subscriptable
+
+In [74]: list('hello')
+Out[74]: ['h', 'e', 'l', 'l', 'o']
+
+
+In [75]: 'www.baidu.com'.split('.')
+Out[75]: ['www', 'baidu', 'com']
+
+
+嵌套列表：
+In [76]: l3= [ [],[]]
+
+In [77]: len(l3)
+Out[77]: 2
+
+In [78]: l3 =  [  ['one','two'],[1,2,3]]
+
+In [79]: l3
+Out[79]: [['one', 'two'], [1, 2, 3]]
+
+In [80]: len(l3)
+Out[80]: 2
+
+
+
+嵌套列表的取值：
+
+In [81]: l2 = ['insert','append','remove','pop','sort']
+
+In [82]: l2[0]
+Out[82]: 'insert'
+
+In [83]: l3
+Out[83]: [['one', 'two'], [1, 2, 3]]
+
+In [84]: l3[0]
+Out[84]: ['one', 'two']
+
+In [85]: l3[1]
+Out[85]: [1, 2, 3]
+
+In [86]: l4=l3[0]
+
+In [87]: l4[1]
+Out[87]: 'two'
+
+In [88]: l3[0][1]
+Out[88]: 'two'
+
+In [89]: l3[1][1]
+Out[89]: 2
+
+
+In [92]: l1=['qfedu.com',1314,'521']
+
+In [93]: l1
+Out[93]: ['qfedu.com', 1314, '521']
+
+In [94]: l1[0]='千千'
+
+In [96]: l1
+Out[96]: ['千千', 1314, '521']
+
+
+
+In [100]: a,b = '12'
+In [103]: l1=['qfedu.com',1314,'521']
+
+In [104]: a,b,c = l1
+
+In [105]: a
+Out[105]: 'qfedu.com'
+
+In [106]: b
+Out[106]: 1314
+
+In [107]: c
+Out[107]: '521'
+
+
+In [127]: if 'qfedu.com' in l1:
+     ...:     print("存在")
+     ...: 
+存在
+
+
+
+====必会函数：
+= len()
+In [117]: li
+Out[117]: ['一个', '二个']
+
+In [118]: len(li)
+Out[118]: 2
+
+= in
+In [121]: l1
+Out[121]: ['qfedu.com', 1314, '521']
+
+In [122]: '521' in l1
+Out[122]: True
+
+In [123]: 521 in l1
+Out[123]: False
+
+= append  只在末尾增加一个参数
+In [128]: li.append(521)
+
+In [129]: li
+Out[129]: ['一个', '二个', 521]
+
+= insert  索引号   元素
+In [130]: li.insert(2,'125')
+
+In [131]: li
+Out[131]: ['一个', '二个', '125', 521]
+
+In [132]: li.insert(0,'000')
+
+In [133]: li
+Out[133]: ['000', '一个', '二个', '125', 521]
+
+
+= remove 移除   #删除左边第一个
+
+In [137]: li
+Out[137]: [125, '000', '一个', '二个', '125']
+
+In [138]: li.remove(125)
+
+In [139]: li
+Out[139]: ['000', '一个', '二个', '125']
+
+
+= pop  从列表中删除一个，并返回值
+
+In [139]: li
+Out[139]: ['000', '一个', '二个', '125']
+
+In [140]: li.pop()
+Out[140]: '125'
+
+In [141]: li
+Out[141]: ['000', '一个', '二个']
+
+In [142]: li.pop()
+Out[142]: '二个'
+
+In [143]: li
+Out[143]: ['000', '一个']
+
+
+In [152]: li
+Out[152]: ['qfedu.com', 1314, '521']
+
+In [153]: li.pop(1)
+Out[153]: 1314
+
+In [154]: li
+Out[154]: ['qfedu.com', '521']
+
+
+====
+for 循环
+
+
+In [161]: i=li
+
+In [162]: li
+Out[162]: ['qfedu.com', 1314, '521', 'qf']
+
+In [163]: for i in li:
+     ...:     print(i)
+     ...: 
+qfedu.com
+1314
+521
+qf
+
+In [170]: for w in 'hell o':
+     ...:     print(w)
+     ...: 
+h
+e
+l
+l
+ 
+o
+
+
+=====元组 是相对不可变的  元组是用逗号创建的
+
+In [171]: t1=()
+
+In [172]: type(t1)
+Out[172]: tuple
+
+
+
+In [173]: n = (3)
+
+In [174]: type(n)
+Out[174]: int
+
+In [175]: t = 3,
+
+In [177]: t
+Out[177]: (3,)
+
+In [178]: type(t)
+Out[178]: tuple
+
+In [179]: a, b = 1,2
+
+In [180]: a = 1,2
+
+In [181]: a
+Out[181]: (1, 2)
+
+In [182]: type(a)
+Out[182]: tuple
+
+
+In [183]: s1 = 'car'
+
+In [184]: s1
+Out[184]: 'car'
+
+In [185]: list(s1)
+Out[185]: ['c', 'a', 'r']
+
+In [186]: tuple(s1)
+Out[186]: ('c', 'a', 'r')
+
+
+In [188]: t2 = tuple(s1)
+
+In [189]: t2
+Out[189]: ('c', 'a', 'r')
+
+
+In [194]: t1
+Out[194]: (1, 2, 3, ['a', 'b'], 'hello')
+
+In [195]: t1[-1]
+Out[195]: 'hello'
+
+In [196]: t1[-2]
+Out[196]: ['a', 'b']
+
+In [197]: t1[-1][-1]
+Out[197]: 'o'
+
+In [199]: t1[-2][0]
+Out[199]: 'a'
+
+计数：
+In [2]: t2=(1,1,10,10)
+
+In [3]: t2.count(10)
+Out[3]: 2
+
+In [4]: t2.count(1)
+Out[4]: 2
+
+查索引号
+In [5]: t2.index(1)
+Out[5]: 0
+
+In [6]: t2.index(10)
+Out[6]: 2
+
+
+====
+字典：键值对 dict{}
+{1:'整型',1.1:'浮点型',False:'布尔值','abc':'字符串',(1,2):'元组'}
+
+In [23]: type({})
+Out[23]: dict
+In [24]: d2= {"size": 8096}
+
+In [25]: d2
+Out[25]: {'size': 8096}
+
+In [26]: d3 = { 'a': 1,'b':2}
+
+In [27]: d3
+Out[27]: {'a': 1, 'b': 2}
+
+In [28]: print(d3)
+{'a': 1, 'b': 2}
+
+In [29]: d4 = dict()
+
+In [30]: d3
+Out[30]: {'a': 1, 'b': 2}
+
+In [31]: d4
+Out[31]: {}
+
+In [32]: li = [(1,2),(3,4)]
+
+In [33]: dict(li)
+Out[33]: {1: 2, 3: 4}
+
+#合并
+In [1]: x = {"a" :1}
+In [2]: y = {"b":2}
+
+In [3]: {**x,**y}
+Out[3]: {'a': 1, 'b': 2}
+
+{1:'整型',1.1:'浮点型',False:'布尔值','abc':'字符串',(1,2):'元组'}
+
+
+
+In [50]: {'user':'shark','age':17}
+Out[50]: {'user': 'shark', 'age': 17}
+
+In [51]: 3 == True
+Out[51]: False
+
+In [52]: 0==False
+Out[52]: True
+
+In [53]: 1 is True
+Out[53]: False
+
+In [54]: 0 is False
+Out[54]: False
+
+
+In [55]: {1:'整形',True:"布尔型"}
+Out[55]: {1: '布尔型'}
+
+In [55]: {True:'整形',1:"布尔型"}
+Out[55]: {True: '布尔型'}
+
+
+
+
+In [62]: l=[{'a':1},{2:2}]
+
+In [63]: l[0]
+Out[63]: {'a': 1}
+
+In [64]: {'mysql-01':{'cpu':4,'memory':[4096,4096]}}
+
+
+In [65]: {'f':id}
+Out[65]: {'f': <function id(obj, /)>}
+
+In [66]: def foo():
+    ...:     print('hello')
+    ...: 
+
+In [67]: {'1':foo}
+Out[67]: {'1': <function __main__.foo()>}
+
+In [68]: print({'1':foo})
+{'1': <function foo at 0x7f090fd61dd0>}
+
+
+
+In [69]: dic_map = {
+    ...:     "Manufacturer" : "manufacturer",
+    ...:     "Product Name": "pod_name",
+    ...:     "Serial Number": "sn"
+    ...:     }
+
+In [71]: dic_map
+Out[71]: 
+{'Manufacturer': 'manufacturer',
+ 'Product Name': 'pod_name',
+ 'Serial Number': 'sn'}
+ 
+ 
+ 
+ 
+In [73]: "Manufacturer" in dic_map
+Out[73]: True
+
+In [74]: "Manufacturerr" in dic_map
+Out[74]: False
+
+In [75]: line = '\tManufacturer: Alibaba Cloud'
+
+In [76]: line
+Out[76]: '\tManufacturer: Alibaba Cloud'
+
+In [77]: line.strip()
+Out[77]: 'Manufacturer: Alibaba Cloud'
+
+In [78]: line.strip().split(': ')
+Out[78]: ['Manufacturer', 'Alibaba Cloud']
+
+In [79]: k = line.strip().split(': ')[0]
+
+In [80]: k in dic_map
+Out[80]: True
+
+
+
+In [82]: dic_map['Manufacturer']
+Out[82]: 'manufacturer'
+
+In [83]: dic_map[k]
+Out[83]: 'manufacturer'
+
+In [90]: v=dic_map.get('Manufacturerr')
+
+In [91]: v
+
+In [92]: type(v)
+Out[92]: NoneType
+
+In [93]: v=dic_map.get('Manufacturer')
+
+In [94]: v
+Out[94]: 'manufacturer'
+
+
+In [95]: v=dic_map.get('Manufacturerr', 'Key not in')
+
+In [96]: v
+Out[96]: 'Key not in'
+
+In [97]: v=dic_map.get('Manufacturerr', [])
+
+In [98]: v
+Out[98]: []
+
+【5-3.05】 创建循环字典
+
+In [4]: dic_map
+Out[4]: 
+{'Manufacturer': 'manufacturer',
+ 'Product Name': 'pod_name',
+ 'Serial Number': 'sn'}
+
+In [5]: dic_map.values()
+Out[5]: dict_values(['manufacturer', 'pod_name', 'sn'])
+
+In [6]: for i in dic_map.values():
+   ...:     print(i)
+   ...: 
+manufacturer
+pod_name
+sn
+
+In [7]: dic_map.items()
+Out[7]: dict_items([('Manufacturer', 'manufacturer'), ('Product Name', 'pod_name'), ('Serial Number', 'sn')])
+
+In [8]: list(dic_map.items())
+Out[8]: 
+[('Manufacturer', 'manufacturer'),
+ ('Product Name', 'pod_name'),
+ ('Serial Number', 'sn')]
+
+In [9]: for k in dic_map:
+   ...:     print(k)
+   ...: 
+Manufacturer
+Product Name
+Serial Number
+
+In [10]: 
+
+In [10]: for i in dic_map.items():
+    ...:     print(i)
+    ...: 
+('Manufacturer', 'manufacturer')
+('Product Name', 'pod_name')
+('Serial Number', 'sn')
+
+In [11]: for i in dic_map.items():
+    ...:     k, v =i
+    ...:     print(k,v)
+    ...: 
+Manufacturer manufacturer
+Product Name pod_name
+Serial Number sn
+
+In [12]: for k, v in dic_map.items():
+    ...:     print(k,v)
+    ...: 
+Manufacturer manufacturer
+Product Name pod_name
+Serial Number sn
+
+【5-3.06】 字典的修改
+
+In [13]: info = {}
+
+In [14]: info['a'] =1
+
+In [15]: info
+Out[15]: {'a': 1}
+
+In [16]: info['cpu']= 4
+
+In [17]: info['memeory'] = [4096,4096]
+
+In [18]: info
+Out[18]: {'a': 1, 'cpu': 4, 'memeory': [4096, 4096]}
+
+In [19]: info['cpu']=8
+
+In [20]: info
+Out[20]: {'a': 1, 'cpu': 8, 'memeory': [4096, 4096]}
+
+li = ['Manufacturer:Alibaba Cloud',
+'Product Name: Alibaba Cloud ECS',
+'Version:pc-i440fx-2.1',
+'Serial Number: 0f7e3d86-7742-4612-9f93-e3a9e4754157']
+
+ dic_map={'Manufacturer': 'manufacturer',
+ 'Product Name': 'pod_name',
+ 'Serial Number': 'sn'}
+
+In [34]: for line in li:
+    ...:     k, v = line.split(':')
+    ...:     if k in dic_map:
+    ...:         new_k=dic_map[k]
+    ...:         print(new_k, v)
+    ...: 
+manufacturer Alibaba Cloud
+pod_name  Alibaba Cloud ECS
+sn  0f7e3d86-7742-4612-9f93-e3a9e4754157
+
+
+
+In [37]: for line in li:
+    ...:     k, v = line.split(':')
+    ...:     if k in dic_map:
+    ...:         new_k=dic_map[k]
+    ...:         prod_info[new_k]=v
+    ...: 
+    ...: 
+
+In [38]: prod_info
+Out[38]: 
+{'manufacturer': 'Alibaba Cloud',
+ 'pod_name': ' Alibaba Cloud ECS',
+ 'sn': ' 0f7e3d86-7742-4612-9f93-e3a9e4754157'}
+ 
+ #update 更新方法
+ 
+ In [39]: disk = {"disk": [10240]}
+
+In [40]: info={}
+
+In [41]: info.update(disk)
+
+In [42]: info
+Out[42]: {'disk': [10240]}
+
+In [43]: info.update({'cpu':4})
+
+In [44]: info
+Out[44]: {'disk': [10240], 'cpu': 4}
+
+In [51]: info['disk'][0:2]
+Out[51]: [10240]
+
+In [52]: info['disk'][0]
+Out[52]: 10240
+
+【5-3.07】 面向字典编程
+
+In [63]: !vi some.py
+data = {
+    '0': 'zero',
+    '1': 'one',
+    '2': 'two',
+    'q': 'quit'
+}
+
+while True:
+    arg = input(">>:")
+    v = data.get(arg, 'nothing')
+    if v == 'quit':
+        break
+    print(v)
+~             
+
+In [64]: %run some.py
+
+【5.3.08】创建集合 ？只有Key 的字典
+
+
+In [1]: type({1,2})
+Out[1]: set
+
+In [2]: {1,1}
+Out[2]: {1}
+
+In [3]: {1,True}
+Out[3]: {1}
+
+In [4]: set{}
+  File "<ipython-input-4-bcdbceb6c654>", line 1
+    set{}
+       ^
+SyntaxError: invalid syntax
+
+
+In [5]: set()
+Out[5]: set()
+
+In [6]: type(set())
+Out[6]: set
+
+In [7]: type({})
+Out[7]: dict
+
+In [8]: type({1})
+Out[8]: set
+
+In [9]: set('disk')
+Out[9]: {'d', 'i', 'k', 's'}
+
+In [10]: set('disssk')
+Out[10]: {'d', 'i', 'k', 's'}
+
+
+
+In [11]: set(['disk','cpu',1])
+Out[11]: {1, 'cpu', 'disk'}
+
+In [12]: set(['disk','cpu',['a']])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-12-a1552ae23baa> in <module>
+----> 1 set(['disk','cpu',['a']])
+
+TypeError: unhashable type: 'list'
+
+In [13]: hash(['a'])
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-13-852fd05197a8> in <module>
+----> 1 hash(['a'])
+
+TypeError: unhashable type: 'list'
+
+In [14]: set( ('disk','cpu')   )
+Out[14]: {'cpu', 'disk'}
+
+In [15]: set({'disk':'560G','cpu':'4'})   # 保留字典的键，丢掉value
+Out[15]: {'cpu', 'disk'}
+
+【5.3.09】集合的运算
+
+s1={"192.168.1.51","192.168,1.45"}
+s2={'192.168,1.78', '192.168.1.51'}
+
+#交集：
+In [22]: s1 & s2
+Out[22]: {'192.168.1.51'}
+
+#并集：
+In [25]: s1 | s2
+Out[25]: {'192.168,1.45', '192.168,1.78', '192.168.1.51'}
+
+#差集：
+In [26]: s1 - s2
+Out[26]: {'192.168,1.45'}
+
+In [27]: s2 - s1
+Out[27]: {'192.168,1.78'}
+
+#异或集（取出两个集合都是独有的，并拼到一块）
+In [28]: s1^s2
+Out[28]: {'192.168,1.45', '192.168,1.78'}
+
+
+【5.3.10】函数的参数：
+
+#定义几个位置参数，就只能传入几个位置参数，不能多或少
+In [30]: def foo(x, y):
+    ...:     print("x 的值 是", x)
+    ...:     print("y 的值 是", y)
+    ...: 
+
+In [31]: foo(2,3)
+x 的值 是 2
+y 的值 是 3
+
+In [32]: foo(3,2)
+x 的值 是 3
+y 的值 是 2
+
+In [33]: foo()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-33-c19b6d9633cf> in <module>
+----> 1 foo()
+
+TypeError: foo() missing 2 required positional arguments: 'x' and 'y'
+
+
+
+#默认参数: y是默认参数，默认参数只能放在后面。
+def foo(x, y=10):
+    ...:     print(x)
+    ...:     print(y)
+
+In [40]: foo(1)
+1
+10
+
+In [41]: foo(2,3)
+2
+3
+
+#关键字参数：
+In [44]: foo(y=2,x=3)
+3
+2
+
+【5.3.11】函数的返回值：
+
+
+In [45]: def foo():
+    ...:     return 20
+    ...: 
+
+
+In [47]: foo()
+Out[47]: 20
+
+In [48]: n = foo()
+
+In [49]: def func():
+    ...:     return 1, 'hello', [1,2,3],{'a':1}
+    ...: 
+
+In [50]: t = func()
+
+In [51]: t
+Out[51]: (1, 'hello', [1, 2, 3], {'a': 1})
+
+In [52]: n, s, li, d = func()
+
+In [53]: n
+Out[53]: 1
+
+In [54]: s
+Out[54]: 'hello'
+
+In [55]: li
+Out[55]: [1, 2, 3]
+
+In [56]: d
+Out[56]: {'a': 1}
+
+# 星式表达式
+
+In [57]: *_,d = func()
+
+In [58]: d
+Out[58]: {'a': 1}
+
+In [59]: n, *_ = func()
+
+In [60]: n
+Out[60]: 1
+
+In [61]: n, *li = func()
+
+In [62]: n
+Out[62]: 1
+
+In [63]: li
+Out[63]: ['hello', [1, 2, 3], {'a': 1}]
+
+Out[63]: ['hello', [1, 2, 3], {'a': 1}]
+
+In [64]: n, s, _, d= func()
+
+In [65]: n
+Out[65]: 1
+
+In [66]: s
+Out[66]: 'hello'
+
+In [67]: d
+Out[67]: {'a': 1}
+
+【5.3.12】subprocess
+
+In [1]: import subprocess
+
+In [2]: prod_info = 'dmidecode -q -t 1 2>/dev/null'
+
+In [3]: subprocess.getoutput(prod_info)
+Out[3]: 'System Information\n\tManufacturer: VMware, Inc.\n\tProduct Name: VMware Virtual Platform\n\tVersion: None\n\tSerial Number: VMware-56 4d 98 99 dc f0 58 07-01 a2 22 44 87 15 36 74\n\tUUID: 99984D56-F0DC-0758-01A2-224487153674\n\tWake-up Type: Power Switch\n\tSKU Number: Not Specified\n\tFamily: Not Specified\n'
+
+In [4]: ret = subprocess.getoutput(prod_info)
+
+In [5]: ret.splitlines()
+Out[5]: 
+['System Information',
+ '\tManufacturer: VMware, Inc.',
+ '\tProduct Name: VMware Virtual Platform',
+ '\tVersion: None',
+ '\tSerial Number: VMware-56 4d 98 99 dc f0 58 07-01 a2 22 44 87 15 36 74',
+ '\tUUID: 99984D56-F0DC-0758-01A2-224487153674',
+ '\tWake-up Type: Power Switch',
+ '\tSKU Number: Not Specified',
+ '\tFamily: Not Specified']
+
+In [6]: for line in ret.splitlines():
+   ...:     print(line)
+   ...: 
+System Information
+        Manufacturer: VMware, Inc.
+        Product Name: VMware Virtual Platform
+        Version: None
+        Serial Number: VMware-56 4d 98 99 dc f0 58 07-01 a2 22 44 87 15 36 74
+        UUID: 99984D56-F0DC-0758-01A2-224487153674
+        Wake-up Type: Power Switch
+        SKU Number: Not Specified
+        Family: Not Specified
+		
+In [7]: for line in ret.splitlines():
+   ...:     if 'Manufacturer' in line:
+   ...:         print(line)
+   ...: 
+        Manufacturer: VMware, Inc.
+
+In [8]: for line in ret.splitlines():
+   ...:     if 'Manufacturer' in line:
+   ...:         print(line)
+   ...:     elif 'Product Name' in line:
+   ...:         print(line)
+   ...: 
+        Manufacturer: VMware, Inc.
+        Product Name: VMware Virtual Platform
+
+In [9]: for line in ret.splitlines():
+   ...:     if 'Manufacturer' in line:
+   ...:         print(line)
+   ...:     elif 'Product Name' in line:
+   ...:         print(line)
+   ...:     elif 'Serial Number' in line:
+   ...:         print(line)
+   ...: 
+        Manufacturer: VMware, Inc.
+        Product Name: VMware Virtual Platform
+        Serial Number: VMware-56 4d 98 99 dc f0 58 07-01 a2 22 44 87 15 36 74	
+
+
+【5.3.13】获取主版信息
+
+In [17]: prod_info
+Out[17]: 'dmidecode -q -t 1 2>/dev/null'
+
+In [18]: subprocess.getoutput(prod_info)
+Out[18]: 'System Information\n\tManufacturer: VMware, Inc.\n\tProduct Name: VMware Virtual Platform\n\tVersion: None\n\tSerial Number: VMware-56 4d 98 99 dc f0 58 07-01 a2 22 44 87 15 36 74\n\tUUID: 99984D56-F0DC-0758-01A2-224487153674\n\tWake-up Type: Power Switch\n\tSKU Number: Not Specified\n\tFamily: Not Specified\n'
+
+
+
+In [27]: !vim get_info.py
+
+#!/usr/bin/env python3
+import subprocess
+prod_info = 'dmidecode -q -t 1 2>/dev/null'
+ret = subprocess.getoutput(prod_info)
+
+prod_dic={}
+
+for line in ret.splitlines():
+    line = line.strip()
+    if 'Manufacturer' in line:
+        k,v=line.split(':')
+        prod_dic[k.lower()]=v
+    elif 'Product Name' in line:
+        k,v=line.split(':')
+        prod_dic[k.lower()]=v
+    elif 'Serial Number' in line:
+        _,v=line.split(':')
+        prod_dic['sn']=v
+print(prod_dic)
+
+In [28]: %run get_info.py
+{'manufacturer': ' VMware, Inc.', 'product name': ' VMware Virtual Platform', 'sn': ' VMware-56 4d 98 99 dc f0 58 07-01 a2 22 44 87 15 36 74'}

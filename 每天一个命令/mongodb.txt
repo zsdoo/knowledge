@@ -1,0 +1,40 @@
+启动MongoDB服务net start MongoDB
+关闭MongoDB服务net stop MongoDB
+移除 MongoDB 服务C:\mongodb\bin\mongod.exe --remove
+
+##登陆mongodb shell
+cd C:\Program Files\MongoDB\Server\4.0\bin
+在bin目录下输入：mongo.exe
+
+
+
+## MongoDB 插入文档
+执行插入操作：
+db.col.insert({titl:'MongoDB ',
+ descriptio:'MongoDB 是一个nosq ',
+b: 'runoob',
+ur:'http://www.runoob.com'，
+tag: ['mongodb','database','Nosql'],likes:100
+})
+
+
+db.col.insert({titl:'MongoDB 教程',
+ descriptio:'MongoDB 是一个nosql数据库',
+ b: '菜鸟教程',
+ ur:'http://www.runoob.com',
+ tag: ['mongodb','database','Nosql'],likes:100
+  })
+
+
+
+document=({title2:'Mongodb 教程',
+ description: 'Mongodb 是一个nosql 数据库',
+  by : '菜鸟教程',
+  url : 'http://www.runoob.com',
+  tags : ['mongodb','database','Nosql'],
+ likes : 100
+ });
+
+
+执行插入操作：
+db.col.insert(document)

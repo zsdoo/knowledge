@@ -1,0 +1,45 @@
+man man
+man -h
+n N 
+
+
+find:
+find / 
+-name ""
+! -name ""
+
+-atime  访问时间
+-ctime  属性更改时间
+-mtime  内容更改时间
+
+查到的结果复制到/opt:  (-exec -a 好像a是目录)
+1 | xargs -l cp -a {} /opt  一次性复制
+find / -iname "*.log" -! name "error.log" -! name "access.log" -mtime +2 -size +5M -size -10M -user root -type f | xargs -i cp -a {} /opt
+
+2 逐个复制
+find / -iname "*.log" -! name "error.log" -! name "access.log" -mtime +2 -size +5M -size -10M -user root -type f -exec cp {} /opt \;
+
+
+cp -a : 递归复制bai，复制的数据du会保留原有数据的时间戳等信息（具体：时zhi间戳+所有权+复制连结文件属性而非档案本身）
+cp -r : 递归复制，复制的数据会使用新的时间戳等信息
+
+--------------------------------------------------------------------------------------------
+
+grep  对文件进行查找，结果是以行为单位
+
+-n 行号 
+-i 不区分大小写
+-nv 取反
+
+^a  以a开头
+a$  以 结尾
+^$  空行
+
+# -E 扩展的正则表达式   | egrep== grep -E
+grep "^$|#" /etc/httpd/conf/httpd.conf -vE
+
+
+
+
+
+

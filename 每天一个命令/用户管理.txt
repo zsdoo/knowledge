@@ -1,0 +1,32 @@
+用户组命令：
+
+更改密码： passwd username 
+锁定和解锁：passwd -l username       |  passwd -u username
+查看密码修改和过期信息：chage -l zsd
+更改用户过期时间等：usermod -e 2020-08-22 zsd
+删除用户：userdel -r zsd1
+删除组：groupdel ZSD
+
+监控：watch -n 1 ls -ltR /mnt
+
+增加用户：useradd zsd   |useradd -g ZSD zsd1  #指定组
+增加组：groupadd ZSD
+
+查看用户所属组：id zsd
+更改用户所属组：usermod -g ZSD zsd      |  usermod -G ZSD,user zsd  更改附属组，和前一个不冲突
+更改组的所有成员的所属组：groupmod -n TOM tome   # 将组tome的名称改为TOM
+
+更改文件的拥有者和所属组：chown -R zsd:ZSD dir
+更改文件所属组：chgrp -R ZSD dir2
+
+更改文件权限：chmod <u/g/o> <+/-/=> <r/w/x>
+chmod u+x /mnt/file1
+chmod g-r /mnt/file2
+或者 chmod 775 file3
+
+r    对文件：是否可以查看文件中的内容  -->cat file
+      对目录：是否可以查看目录中有什么子文件或子目录-->ls dir
+w   对文件：是否可以改变文件里面记录的字符
+      对目录：是否可以对目录中子目录或子文件进行更改
+x    对文件：是否可以通过文件名称调用文件内记录的程序
+      对目录：是否可以进入目录

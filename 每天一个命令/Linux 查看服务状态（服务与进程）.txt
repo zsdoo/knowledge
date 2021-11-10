@@ -1,0 +1,56 @@
+Linux 查看服务状态（服务与进程）
+
+https://blog.csdn.net/tanga842428/article/details/79040089?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
+原文地址：http://blog.csdn.net/weixin_37979944/article/details/79029188
+
+指令（instruction）: 
+计算机实际上可以做的事情实质上非常简单，比如计算两个数的和，再比如在内存中寻找到某个地址等等。这些最基础的计算机动作被称为指令 (instruction)。 
+程序（program）: 
+这样一系列指令的所构成的集合。通过程序，我们可以让计算机完成复杂的操作。程序大多数时候被存储为可执行的文件。这样一个可执行文件就像是一个菜谱，计算机可以按照菜谱作出可口的饭菜。 
+进程（process）: 
+进程是程序的一个具体实现。只有食谱没什么用，我们总要按照食谱的指点真正一步步实行，才能做出菜肴。进程是执行程序的过程，类似于按照食谱，真正去做菜的过程。同一个程序可以执行多次，每次都可以在内存中开辟独立的空间来装载，从而产生多个进程。不同的进程还可以拥有各自独立的IO接口。 
+可以使用$ps命令来查询正在运行的进程; 
+参数：ps的参数非常多, 在此仅列出几个常用的参数并大略介绍含义 
+-A 列出所有的进程（等价于-e） 
+-w 显示加宽可以显示较多的资讯 
+-au 显示较详细的资讯 
+-aux 显示所有包含其他使用者的行程
+
+服务（service） 
+服务相当于支持系统运行的一些必要程序，默默运行在系统后台的，他可以为应用程序提供一些更有特色的东西，比如播放MP3，开启一个播放MP3的服务，用户点击开始按钮通知服务开启，点击关闭按钮通知服务关闭，如果你禁用这个服务，那别人想播放MP3那是不行的，而且服务之间是有可能互相依靠的。
+
+服务与进程？ 
+有人回答说：你开启了哪个服务任务管理器里就会有哪个服务相对应的进程; 
+有人说：服务是每次开机会按照服务启动模式启动的进程的集合，服务可能包括很多进程。而且启动的进程可能是互相交叉的。
+
+linux查看服务： 
+一、利用进程来查看 
+命令里 ps -aux ｜ grep xxx 是查看某个进程或者服务是否存在。 
+二、利用services命令 
+1.查看单个服务的运行状态： 
+service 服务名 status 
+如：[root@localhost ~]# service sshd status 
+openssh-daemon (pid 3701) 正在运行… 
+2.查看所有服务的运行状态： 
+service –status -all 
+三、利用chkconfig配置工具（并没有试过） 
+（在Ubuntu中是没有chkconfig命令的，可以用update-rc.d 来代替。 
+Ubuntu或者Debian系统中update-rc.d命令，是用来更新系统启动项的脚本。这些脚本的链接位于/etc/rcN.d/目录，对应脚本 位于/etc/init.d/目录。在了解update-rc.d命令之前，你需要知道的是有关Linux 系统主要启动步骤，以及Ubuntu中运行级别的知识。） 
+1.查看单个服务的运行状态： 
+chkconfig 服务名 status 
+2.查看所有服务的运行状态 
+chkconfig –list 
+3.关闭或开启服务状态： 
+chkconfig –level 345 nscd off/on 
+3.关闭或开启服务状态： 
+chkconfig –level 345 nscd off/on 
+4.增加服务： 
+chkconfig –add xxx ( 注意：服务脚本必须存放在 /etc/init.d/目录下) 
+如mysqld 
+[root@www mysql-5.1.59]#cp support-files/mysql.server etc/init.d/mysqld 
+chkconfig mysqld on （各等级为ON,各等级为2345等级） 
+这样就会以系统服务的形式启动了 
+5.删除服务： 
+chkconfig –del XXX 
+runlevel 查看当前等级。 
+注意：运行级别就是操作系统正在运行的功能级别。
