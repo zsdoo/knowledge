@@ -302,7 +302,7 @@ Row size too large. The maximum row size for the used table type, not counting B
 - M>500时转为text
 - M>20000时转为mediumtext
 
-所以过大的内容varchar和text没有区别，同事varchar(M)和text的区别在于：
+所以过大的内容varchar和text没有区别，同时varchar(M)和text的区别在于：
 
 - 单行64K即65535字节的空间，varchar只能用63352/65533个字节，但是text可以65535个字节全部用起来
 - text可以指定text(M)，但是M无论等于多少都没有影响

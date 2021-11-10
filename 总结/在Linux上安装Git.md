@@ -97,6 +97,28 @@ ssh-add ~/.ssh/id_rsa.pub
 4、终端输入
 ssh -T git@gitee.com 
 
+----
+
+git Please tell me who you are解决方法
+你在命令行中执行
+git config --global user.email "zsd-oo@163.com"
+git config --global user.name "zsd-oo"
+
+
+$ git remote add origin zsd-oo@163.com:账户名/learngit.git
+$ git remote add origin git@gitee.com:zhao-shudong/test2.git
+
+
+实际操作中多了一步：git branch -M main
+
+推送到远程：git push -u origin main
+
+----
+
+**2、git config --global -l 查看用户配置**
+
+**3、git config --system -l 查看系统配置**
+
 -----
 
 
