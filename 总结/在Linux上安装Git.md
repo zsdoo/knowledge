@@ -105,7 +105,7 @@ git config --global user.email "zsd-oo@163.com"
 git config --global user.name "zsd-oo"
 
 
-$ git remote add origin zsd-oo@163.com:账户名/learngit.git
+$ git remote add origin zsd-oo@163.com:zsdoo/knowledge.git
 $ git remote add origin git@gitee.com:zhao-shudong/test2.git
 
 
