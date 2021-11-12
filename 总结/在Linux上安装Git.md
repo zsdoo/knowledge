@@ -25,7 +25,7 @@ $ `git reset --hard f3c8391c4`
 查看当前分支：`git branch`
 切换回master分支：`$ git checkout master`
 
-**推荐用switch**
+**切换分支推荐用switch**
 创建并切换到新的`dev`分支：`git switch -c dev`
 切换到已有的`master`分支：`git switch master`
 

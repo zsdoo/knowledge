@@ -38,14 +38,17 @@ sql审核上线
 故障告警处理
 新技术的跟踪
 
-1 规范现有数据库。检查已有数据与模型不一致，未添加默认字段等问题；排查不合理字段导致的性能问题，与构架师及主管商议处理。
-2 制定数据库规范，并纪录到FC文档上。
-3 审核开发的sql，对不合理处进行优化
-4 与构架师及主管商议制定数据库备份及恢复策略。
-5 日常监控数据库异常及优化工作
-6 日常数据表的建立，及权限码的维护等
-7 相关迁移数据相关的软件的学习与测试，如：hadoop、Hive、Hbase、mongoDB、HDFS 等 列数据库与分布式文件系统
-8 java基础--spring框架--mybitis 框架--微服务框架
+1 规范现有数据库。检查已有数据与模型不一致，未添加默认字段等问题；排查不合理字段导致的性能问题，与构架师及主管商议处理。（进行中）
+2 制定数据库规范，并纪录到FC文档上。（已完成）
+3 审核开发的sql，对不合理处进行优化。（通过慢查询日志排查，进行中）
+4 与构架师及主管商议制定数据库备份及恢复策略。（已完成）
+5 日常监控数据库异常及优化工作。（进行中）
+6 日常数据表的建立，及权限码的维护等。（进行中）
+7 相关迁移数据相关的软件的学习与测试，如：hadoop、Hive、Hbase、mongoDB、HDFS 等 列数据库与分布式文件系统。（进行中）
+8 java基础--spring框架--mybitis 框架--微服务框架。（进行中）
+
+#查询表中的慢日志：
+SELECT t.sql_text,`start_time`, `user_host`, DATE_FORMAT(t.query_time,'%H:%i:%s:%f') as`query_time`, query_time, `rows_sent`, `rows_examined`, `db`, `last_insert_id`, `insert_id`, `server_id`, `thread_id`, cast(t.sql_text as char) FROM mysql.slow_log t WHERE DATE_FORMAT(t.start_time,'%Y%m%d %H:%i')>='20211109 10:20'
 ```
 
 #### mysql 8.0新特性：
