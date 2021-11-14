@@ -259,12 +259,12 @@ SELECT t.sql_text,`start_time`, `user_host`, DATE_FORMAT(t.query_time,'%H:%i:%s:
 
 set global log_queries_not_using_indexes='off';
 
-**ÒÔÍ¬Ê±ÉèÖÃtableºÍfileÑ¡Ïî£¬set global log_output='table,file'**
+**¿ÉÒÔÍ¬Ê±ÉèÖÃÎªtableºÍfileÑ¡Ïî£¬set global log_output='table,file'**
 
 ```sql
 slow_query_log=1       #ÊÇ·ñÆôÓÃÂý²éÑ¯ÈÕÖ¾£¬1ÎªÆôÓÃ£¬0Îª½ûÓÃ
 slow_query_log_file=slow.log       #Ö¸¶¨Âý²éÑ¯ÈÕÖ¾ÎÄ¼þµÄÂ·¾¶ºÍÃû×Ö£¬¿ÉÊ¹ÓÃ¾ø¶ÔÂ·¾¶Ö¸¶¨£»Ä¬ÈÏÖµÊÇ'Ö÷»úÃû_slow.log'£¬Î»ÓÚdatadirÄ¿Â¼
-long_query_time=2     #SQLÓï¾äÔËÐÐÊ±¼äãÐÖµ£¬Ö´ÐÐÊ±¼ä´óÓÚ²ÎÊýÖµµÄÓï¾ä²Å»á±»¼ÇÂ¼ÏÂÀ´
+long_query_time=0.2     #SQLÓï¾äÔËÐÐÊ±¼äãÐÖµ£¬Ö´ÐÐÊ±¼ä´óÓÚ²ÎÊýÖµµÄÓï¾ä²Å»á±»¼ÇÂ¼ÏÂÀ´
 min_examined_row_limit=100     #SQLÓï¾ä¼ì²âµÄ¼ÇÂ¼ÊýÉÙÓÚÉè¶¨ÖµµÄÓï¾ä²»»á±»¼ÇÂ¼µ½Âý²éÑ¯ÈÕÖ¾£¬¼´Ê¹Õâ¸öÓï¾äÖ´ÐÐÊ±¼ä³¬¹ýÁËlong_query_timeµÄãÐÖµ
 log_queries_not_using_indexes=1   #½«Ã»ÓÐÊ¹ÓÃË÷ÒýµÄÓï¾ä¼ÇÂ¼µ½Âý²éÑ¯ÈÕÖ¾
 log_throttle_queries_not_using_indexes=10     #Éè¶¨Ã¿·ÖÖÓ¼ÇÂ¼µ½ÈÕÖ¾µÄÎ´Ê¹ÓÃË÷ÒýµÄÓï¾äÊýÄ¿£¬³¬¹ýÕâ¸öÊýÄ¿ºóÖ»¼ÇÂ¼Óï¾äÊýÁ¿ºÍ»¨·ÑµÄ×ÜÊ±¼ä
@@ -514,7 +514,7 @@ LRUÁÐ±íÓÃÀ´¹ÜÀíÒÑ¾­¶ÁÈ¡µÄÒ³£¬µ«µ±Êý¾Ý¿â¸ÕÆô¶¯Ê±£¬LRUÁÐ±íÊÇ¿ÕµÄ¡£ÕâÊ±Ò³¶¼´æ·ÅÔÚFr
 
 page made young ÏÔÊ¾ÁËLRUÁÐ±íÖÐÒ³ÒÆ¶¯µ½Ç°¶ËµÄ´ÎÊý£¬youngs/s Ã¿ÃëµÄÖµ 
 
-ÃüÖÐÂÊ£ºbuffer pool hit rate  Í¨³£Ó¦¸ÃÐ¡ÓÚ95% ¡£
+ÃüÖÐÂÊ£ºbuffer pool hit rate  Í¨³£Ó¦¸Ã²»Ð¡ÓÚ95% ¡£
 
 <!--show engine innodb status ÏÔÊ¾µÄ²»ÊÇµ±Ç°µÄ×´Ì¬£¬¶øÊÇ¹ýÈ¥Ä³¸öÊ±¼ä·¶Î§ÄÚµÄinnodb ´æ´¢ÒýÇæµÄ×´Ì¬¡£per second averages calculated from the last 24 seconds  24ÃëÄÚµÄ×´Ì¬-->  
 
@@ -1532,7 +1532,7 @@ Phantom Problem£¨»ÃÏñÎÊÌâ£©ÊÇÖ¸ÔÚÍ¬Ò»ÊÂÎñÏÂ£¬Á¬ÐøÖ´ÐÐÁ½´ÎÍ¬ÑùµÄSQLÓï¾ä¿ÉÄÜµ¼ÖÂ²»
 ÒòÎª²»Í¬ËøÖ®¼äµÄ¼æÈÝÐÔ¹ØÏµ£¬ÔÚÓÐÐ©Ê±¿ÌÒ»¸öÊÂÎñÖÐµÄËøÐèÒªµÈ´ýÁíÒ»¸öÊÂÎñÖÐµÄËøÊÍ·ÅËüËùÕ¼ÓÃµÄ×ÊÔ´£¬Õâ¾ÍÊÇ×èÈû¡£×èÈû²¢²»ÊÇÒ»¼þ»µÊÂ£¬ÆäÊÇÎªÁËÈ·±£ÊÂÎñ¿ÉÒÔ²¢·¢ÇÒÕý³£µØÔËÐÐ¡£
 innodb_lock_wait_timeout ÓÃÀ´¿ØÖÆµÈ´ýµÄÊ±¼ä£¬Ä¬ÈÏ50Ãë£¬ÊÇ¶¯Ì¬µÄ£¬¿ÉÒÔµ÷Õû£ºset @@innodb_lock_wait_timeout=60;
 innodb_rollback_on_timeoutÓÃÀ´Éè¶¨ÊÇ·ñÔÚµÈ´ý³¬Ê±Ê±¶Ô½øÐÐÖÐµÄÊÂÎñ½øÐÐ»Ø¹ö²Ù×÷£¬Ä¬ÈÏÊÇoff£¬´ú±í²»»Ø¹ö£¬¾²Ì¬µÄ¡£
-ÐèÒªÀÎ¼ÇµÄÊÇ£¬ÔÚÄ¬ÈÏÇé¿öÏÂinnodb´æ´¢ÒýÇæ²»»á»Ø¹ö³¬Ê±Òý·¢µÄ´íÎóÒì³££¨ËÀËø³ýÍâ£©¡£Èç¹ûÊÂÎñBµÄ²åÈë5µÄ²Ù×÷ÐèÒªµÈ´ýÊÂÎñAÊÍ·ÅÕâ¸ö×ÊÔ´£¬µ±µÈ´ý³¬Ê±Å×³öÒì³££¬ÖØÐÂ²éÑ¯»á·¢ÏÖ5ÊÇ´æÔÚµÄ¡£ÕâÊÇÊ®·ÖÎ£ÏÕµÄ×´Ì¬£¬Òò´ËÓÃ»§±ØÐëÅÐ¶ÏÊÇ·ñÐèÒªcommit»¹ÊÇrollback£¬Ö®ºóÔÙ½øÐÐÏÂÒ»²½µÄ²Ù×÷¡£
+**ÐèÒªÀÎ¼ÇµÄÊÇ£¬ÔÚÄ¬ÈÏÇé¿öÏÂinnodb´æ´¢ÒýÇæ²»»á»Ø¹ö³¬Ê±Òý·¢µÄ´íÎóÒì³£**£¨ËÀËø³ýÍâ£©¡£Èç¹ûÊÂÎñBµÄ²åÈë5µÄ²Ù×÷ÐèÒªµÈ´ýÊÂÎñAÊÍ·ÅÕâ¸ö×ÊÔ´£¬µ±µÈ´ý³¬Ê±Å×³öÒì³££¬ÖØÐÂ²éÑ¯»á·¢ÏÖ5ÊÇ´æÔÚµÄ¡£ÕâÊÇÊ®·ÖÎ£ÏÕµÄ×´Ì¬£¬Òò´ËÓÃ»§±ØÐëÅÐ¶ÏÊÇ·ñÐèÒªcommit»¹ÊÇrollback£¬Ö®ºóÔÙ½øÐÐÏÂÒ»²½µÄ²Ù×÷¡£
 
 ### 6.7 ËÀËø
 
@@ -1572,7 +1572,7 @@ Innodb ´æ´¢ÒýÇæ²»´æÔÚËøÉý¼¶µÄÎÊÌâ¡£ÒòÎªÆä²»ÊÇ¸ù¾ÝÃ¿¸ö¼ÇÂ¼À´²úÉúÐÐËøµÄ£¬Ïà·´£¬Æä¸
 
 ### 7.1 ÈÏÊ¶ÊÂÎñ
 #### 7.1.1 ¸ÅÊö
-ÊÂÎñÊÇ·ÃÎÊ²¢¸üÐÂÊý¾Ý¿âÖÐ¸÷ÖÖÊý¾ÝÏîµÄÒ»¸ö³ÌÐòÖ´ÐÐµ¥Ôª¡£ÔÚÊÂÎñÖÐµÄ²Ù×÷£¬ÒªÃ´¶¼×öÐÞ¸Ä£¬ÒªÃ´¶¼²»×ö£¬Õâ¾ÍÊÇÊÂÎñµÄÄ¿µÄ£¬Ò²ÊÇÊÂÎñÄ£ÐÍÇø±ðÓëÎÄ¼þÏµÍ³µÄÖØÒªÌØÕ÷Ö®Ò»¡£
+ÊÂÎñÊÇ·ÃÎÊ²¢¸üÐÂÊý¾Ý¿âÖÐ¸÷ÖÖÊý¾ÝÏîµÄÒ»¸ö³ÌÐòÖ´ÐÐµ¥Ôª¡£ÔÚÊÂÎñÖÐµÄ²Ù×÷£¬ÒªÃ´¶¼×öÐÞ¸Ä£¬ÒªÃ´¶¼²»×ö£¬Õâ¾ÍÊÇÊÂÎñµÄÄ¿µÄ£¬**Ò²ÊÇÊÂÎñÄ£ÐÍÇø±ðÓëÎÄ¼þÏµÍ³µÄÖØÒªÌØÕ÷Ö®Ò»**¡£
 Ô­×ÓÐÔ£ºÖ¸Õû¸öÊý¾Ý¿âÊÂÎñÊÇ²»¿É·Ö¸îµÄ¹¤×÷µ¥Î»¡£
 Ò»ÖÂÐÔ£ºÊÂÎñ½«Êý¾Ý¿â´ÓÒ»ÖÖ×´Ì¬×ª±äÎªÏÂÒ»ÖÖÖÂÐÔµÄ×´Ì¬¡£ÔÚÊÂÎñ¿ªÊ¼Ö®Ç°ºÍÊÂÎñ½áÊøÒÔºó£¬Êý¾Ý¿âµÄÍêÕûÐÔÔ¼ÊøÃ»ÓÐ±»ÆÆ»µ¡£
 ¸ôÀëÐÔ£º¸ôÀëÐÔ»¹ÓÐÆäËûµÄ³Æºô£¬Èç²¢·¢¿ØÖÆ¡¢¿É´®ÐÐ»¯¡¢ËøµÈ¡£ÊÂÎñµÄ¸ôÀëÐÔÒªÇóÃ¿¸ö¶ÁÐ´ÊÂÎñµÄ¶ÔÏó¶ÔÆäËûÊÂÎñµÄ²Ù×÷¶ÔÏóÄÜÏà»¥·ÖÀë£¬¼´¸ÃÊÂÎñÌá½»Ç°¶ÔÆäËûÊÂÎñ²»¿É¼û£¬Í¨³£ÕâÖÖÊ¹ÓÃËøÀ´ÊµÏÖ¡£

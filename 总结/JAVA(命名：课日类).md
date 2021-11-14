@@ -1,48 +1,50 @@
+
+
 ### IDEA
 
 原始练习位置：D:\Users\86132\IdeaProjects
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031152338635.png" alt="image-20211031152338635" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031152338635.png" alt="image-20211031152338635" style="zoom:50%;" />
 
 
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031152742723.png" alt="image-20211031152742723" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031152742723.png" alt="image-20211031152742723" style="zoom:50%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031153225806.png" alt="image-20211031153225806" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153225806.png" alt="image-20211031153225806" style="zoom:50%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031153357983.png" alt="image-20211031153357983" style="zoom: 33%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153357983-16367083193791.png" alt="image-20211031153357983" style="zoom: 33%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031153540305.png" alt="image-20211031153540305" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153540305.png" alt="image-20211031153540305" style="zoom:50%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031153643622.png" alt="image-20211031153643622" style="zoom:33%;" />
-
-
-
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031154455669.png" alt="image-20211031154455669" style="zoom:50%;" />
-
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031154556931.png" alt="image-20211031154556931" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153643622.png" alt="image-20211031153643622" style="zoom:33%;" />
 
 
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031155055874.png" alt="image-20211031155055874" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031154455669.png" alt="image-20211031154455669" style="zoom:50%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031155402095.png" alt="image-20211031155402095" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031154556931.png" alt="image-20211031154556931" style="zoom:50%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031155445346.png" alt="image-20211031155445346" style="zoom:50%;" />
+
+
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031155055874.png" alt="image-20211031155055874" style="zoom:50%;" />
+
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031155402095.png" alt="image-20211031155402095" style="zoom:50%;" />
+
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031155445346.png" alt="image-20211031155445346" style="zoom:50%;" />
 
 运行：| 显示或隐藏结果：ALT+4 
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031155712143.png" alt="image-20211031155712143" style="zoom: 33%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031155712143.png" alt="image-20211031155712143" style="zoom: 33%;" />
 
-![image-20211031161024385](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031161024385.png)
+![image-20211031161024385](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031161024385.png)
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031161821420.png" alt="image-20211031161821420" style="zoom: 33%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031161821420.png" alt="image-20211031161821420" style="zoom: 33%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031162114318.png" alt="image-20211031162114318" style="zoom: 67%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031162114318.png" alt="image-20211031162114318" style="zoom: 67%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031163336911.png" alt="image-20211031163336911" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031163336911.png" alt="image-20211031163336911" style="zoom:50%;" />
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031164344508.png" alt="image-20211031164344508" style="zoom: 33%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031164344508.png" alt="image-20211031164344508" style="zoom: 33%;" />
 
 
 
@@ -491,7 +493,7 @@ public static int  sum(int a, int b) {
 
 ### Day04-10  0419 12:55    方法的三种调用格式
 
-![image-20211031144404117](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031144404117.png)
+![image-20211031144404117](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031144404117.png)
 
   方法的三种调用格式
   1 单独调用：方法名称（参数）; (因没有打印，所以不会显示出内容来)
@@ -1168,7 +1170,7 @@ public class Demo02ArrayReturn {
 
 ### Day06-1 面向对象
 
-![image-20211031222027095](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031222027095.png)
+![image-20211031222027095](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031222027095.png)
 
 ```java
 package cn.itcast.day06.demo01;
@@ -1212,7 +1214,7 @@ public class Demo01PrintArray {
 #### 什么是对象
 对象：是一类事物的具体体现。对象是类的一个**实例**，必然具备该类事物的属性和行为。
 
-<img src="C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211031225211418.png" alt="image-20211031225211418" style="zoom:67%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031225211418.png" alt="image-20211031225211418" style="zoom:67%;" />
 
 ### Day06-04 类的定义
 
@@ -1387,7 +1389,7 @@ public class Demo01PhoneOne {
 
 ### Day06-07  对象的内存图
 
-![image-20211107160420905](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211107160420905.png)
+![image-20211107160420905](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211107160420905.png)
 
 
 
@@ -1436,7 +1438,7 @@ public class Demo02PhoneTwo {
 }
 ```
 
-![image-20211107162548337](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211107162548337.png)
+![image-20211107162548337](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211107162548337.png)
 
 
 
@@ -1486,7 +1488,7 @@ public class Demo03PhoneSame {
 }
 ```
 
-![image-20211107163748893](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211107163748893.png)
+![image-20211107163748893](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211107163748893.png)
 
 
 
@@ -1515,7 +1517,7 @@ public class Demo04PhoeParam {
 }
 ```
 
-![image-20211107174351282](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211107174351282.png)
+![image-20211107174351282](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211107174351282.png)
 
 ### Day06-11 使用对象类型作为方法的返回值
 
@@ -1539,7 +1541,7 @@ public class Demo05PhoneReturn {
 }
 ```
 
-![image-20211107183733224](C:\Users\86132\AppData\Roaming\Typora\typora-user-images\image-20211107183733224.png)
+![image-20211107183733224](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211107183733224.png)
 
 
 
@@ -2848,10 +2850,58 @@ Ctrl+F7，在文件中查找用法
 Ctrl+Shift+F7，在文件中高亮显示用法
 
  * 
+
  * swich注意事项
+
  * 1 值 不可以
+
  * 2 只有四种基本类型和两种引用数据类型
+
  * 基本：byte/short/char/int
+
  * 引用：String字符串、enum枚举
+
  * 3 顺序可颠倒，break可以省略，但会穿透；
- * 
+
+   
+
+   
+
+   ![image-20211112171605066](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112171605066.png)
+
+![image-20211112171130555](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112171130555.png)
+
+![image-20211112171924656](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112171924656.png)
+
+![image-20211112172328182](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112172328182.png)
+
+![image-20211112172346290](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112172346290.png)
+
+
+
+
+
+![image-20211112181752052](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112181752052.png)
+
+
+
+
+
+![image-20211112181902469](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112181902469.png)
+
+
+
+![image-20211112182253102](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112182253102.png)
+
+![image-20211112182453540](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112182453540.png)
+
+![image-20211112182503411](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112182503411.png)
+
+![image-20211112182615402](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112182615402.png)
+
+![image-20211112182843548](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112182843548.png)
+
+![image-20211112183049565](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112183049565.png)
+
+![image-20211112183315123](D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211112183315123.png)
+
