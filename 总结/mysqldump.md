@@ -17,6 +17,22 @@ mysqldump
 -t 
 -h10.46.5.210 -P3306 -uyygl -p'tietapassw0rd' --databases balance --tables wx_funds_detail 
 --where="date_format(account_date,'%Y%m')= ${cur_date} and business_type like '企业代付%'" >${fund_dir}/wx_funds_${cur_date}.sql
+
+========
+### 查两行之间：sed -n '/11/,/44/p' file.txt
+
+### 从备份中查出某张表及数据：
+sed -n '/DROP TABLE IF EXISTS `address`;/,/UNLOCK TABLES;/p' hpeback_20211125.sql > address.sql
+
+##备份压缩：tar -zcvf hpeback_20211125.sql.tar.gz  hpeback_20211125.sql
+/usr/local/mysql/bin/mysqldump -h 49.232.146.147 -uroot -proot --single-transaction ${dbname} |gzip > /${dir}/${now}/${dbname}_${now}.sql.tar.gz
+
+### 从压缩gz文件中查找表结构
+gunzip -c hpeback_20211125.sql.tar.gz |sed -n '/DROP TABLE IF EXISTS `address`;/,/UNLOCK TABLES;/p' > 放入文件中
+ 
+ 
+##使用正则表达式。
+sed -n ‘/2010-11-17 09:[0-9][0-9]:[0-9][0-9]/,/2010-11-17 16:[0-9][0-9]:[0-9][0-9]/p’  logfile
 ```
 
 
