@@ -4,7 +4,7 @@ find . -type f -size +100M 查找当前目录下大于100M的文件,-type f表�
 
 **显示当前目录或者文件夹的所占磁盘空间**：du -sh *
 
-**显示前**10个占用空间最大的文件或目录: du -s * | sort -nr | head
+**显示前**10个占用空间最大的文件或目录: du -sh * | sort -nr | head
 
 **查看内存**：top   | free -h  |   cat /proc/meminfo
 

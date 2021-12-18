@@ -56,6 +56,8 @@ gzip 保留源文件：
 
 ```bsh
 zcat xxx.tar.gz
+
+-- tar tvf vsftpd.tar.gz
 ```
 
  但是想要在其后面直接加管道grep处理呢？如下：

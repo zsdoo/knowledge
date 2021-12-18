@@ -12,15 +12,15 @@
 
 <img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153225806.png" alt="image-20211031153225806" style="zoom:50%;" />
 
-<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153357983-16367083193791.png" alt="image-20211031153357983" style="zoom: 33%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153357983-16367083193791.png" alt="image-20211031153357983" style="zoom: 67%;" />
 
-<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153540305.png" alt="image-20211031153540305" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153540305.png" alt="image-20211031153540305" style="zoom: 67%;" />
 
-<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153643622.png" alt="image-20211031153643622" style="zoom:33%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031153643622.png" alt="image-20211031153643622" style="zoom: 67%;" />
 
 
 
-<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031154455669.png" alt="image-20211031154455669" style="zoom:50%;" />
+<img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031154455669.png" alt="image-20211031154455669" style="zoom: 67%;" />
 
 <img src="D:\工作文件\knowledge\总结\Knowledge_pictrue\image-20211031154556931.png" alt="image-20211031154556931" style="zoom:50%;" />
 
